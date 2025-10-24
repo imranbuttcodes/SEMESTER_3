@@ -1,0 +1,103 @@
+Nice — let’s draw it out. Below I’ll show the simple one-member case (what you did), then what happens with multiple members, and what changes if the class has a `vptr` (virtual functions). I’ll also annotate the pointer-cast step that “hacks” the value.
+
+---
+
+# Single-member class (your example)
+
+Code:
+
+```cpp
+class MyClass { int secret = 42; };
+MyClass obj;            // obj lives on the stack in this example
+int* p = (int*)&obj;    // cast object address -> int*
+int hacked = *p;        // read the int bytes at start of obj
+```
+
+ASCII (addresses are illustrative):
+
+```
+Stack (grows down)
++---------------------------+
+|  higher addresses         |
+|                           |
+|  ...                      |
+| 0x7ffc_1008 : (obj start) |  <-- &obj  (same as address of first member)
+| 0x7ffc_1008 .. 0x7ffc_100B: [ 0x0000002A ]   <-- secret (int 42)
+|                           |
+| 0x7ffc_100C : (next stack)
++---------------------------+
+```
+
+Pointer operations:
+
+```
+&obj  == 0x7ffc_1008
+(int*)&obj  -> pointer p = 0x7ffc_1008 (type int*)
+
+*p reads 4 bytes at 0x7ffc_1008 -> 0x0000002A -> 42
+```
+
+So the cast treats the object’s first bytes as an `int` and `*p` returns `secret`. That’s why it "works" here.
+
+---
+
+# Two-member class
+
+Code:
+
+```cpp
+class MyClass2 { int secret = 42; int other = 7; };
+MyClass2 obj2;
+int* p = (int*)&obj2;
+```
+
+ASCII:
+
+```
+&obj2 == 0x7ffc_2000
+0x7ffc_2000 .. 0x7ffc_2003 : [ 0x0000002A ]   // secret (offset 0)
+0x7ffc_2004 .. 0x7ffc_2007 : [ 0x00000007 ]   // other  (offset 4)
+```
+
+* `(int*)&obj2` still points at offset `0` (secret).
+* `p[0]` -> `secret` (42)
+* `p[1]` -> `other`  (7)
+
+So you only get the *first* member by simple `(int*)&obj`. If you rely on offsets, you might read other members, but it's brittle and undefined behavior.
+
+---
+
+# Class with virtual functions (vptr present)
+
+Code:
+
+```cpp
+class MyV { virtual void f(){}; int secret = 42; };
+MyV objv;
+int* p = (int*)&objv;
+```
+
+ASCII (on most ABIs):
+
+```
+&objv == 0x7ffc_3000
+0x7ffc_3000 .. 0x7ffc_3007 : [ vptr (pointer to vtable) ]   // typically 8 bytes on x86_64
+0x7ffc_3008 .. 0x7ffc_300B : [ 0x0000002A ]                 // secret (offset after vptr)
+```
+
+* `(int*)&objv` points to vptr, *not* `secret`. So `*p` returns part of the vptr value (nonsense as an int).
+* The layout changed; your simple hack no longer reads `secret`.
+
+---
+
+# Key takeaways (short)
+
+* The **object bytes** contain data members laid out in order (subject to padding/alignment).
+* For simple POD-like classes with `secret` first, `&obj` == address of `secret`, so casting to `int*` and dereferencing reads the value.
+* This bypasses **compile-time access control** because you operate on raw memory — but it’s **undefined behavior** and non-portable.
+* If the class has more members, padding, or a `vptr` (virtual), offsets change and the hack fails or returns garbage.
+* Works only when the object is where you think it is (stack vs heap is irrelevant to the trick itself — the trick works anywhere the object lives, but addresses differ).
+
+---
+
+Want a tiny annotated diagram showing the exact bytes (in hex) for the single-member case so it’s even clearer?

@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+class MyClass {
+private:
+    int secret = 42;
+public:
+    void show() { cout << "Secret is " << secret << endl; }
+};
+
+int main() {
+    MyClass obj;
+    obj.show();
+
+    // We know 'secret' is the first (and only) data member
+    // So let's cast obj's address to int* and read that memory
+    int* p = (int*) &obj;
+    cout << "Hacked secret: " << *p << endl;  // prints 42, bypassing private access
+
+    // Also, we can modify it
+    *p = 100;
+    obj.show();  // now shows 100
+
+    return 0;
+}

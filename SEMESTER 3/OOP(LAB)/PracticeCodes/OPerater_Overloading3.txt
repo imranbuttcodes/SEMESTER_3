@@ -1,0 +1,136 @@
+Excellent question — and this is actually a **very insightful** example because it touches on how **operator overloading, constructors, and implicit conversions** work together in C++.
+
+Let’s go step-by-step 👇
+
+---
+
+### 🧩 Your line causing the error:
+
+```cpp
+Thing three = one + 10;
+```
+
+You’re trying to **add a `Thing` object (`one`) with an integer literal (`10`)**.
+
+---
+
+### ⚠️ The core issue:
+
+Your `operator+` is defined as:
+
+```cpp
+Thing& operator+(Thing& obj)
+```
+
+That means:
+
+* The **right-hand operand** (`obj`) must be a **non-const reference** to a `Thing` object.
+* But you are passing **`10`**, which is an **int literal**, **not a Thing**.
+
+C++ can perform **implicit conversions**, but only if a **matching constructor** exists.
+You *do* have:
+
+```cpp
+Thing(int x) : x(x) { ... }
+```
+
+✅ So C++ *can* convert `10` into a temporary `Thing(10)`.
+
+BUT 🚨 here’s the catch:
+
+Your operator takes a **non-const reference (`Thing&`)**,
+and **C++ cannot bind a temporary object** (like `Thing(10)`) to a **non-const reference** parameter.
+
+That’s why the compiler gives an error.
+
+---
+
+### 🧠 The rule:
+
+> Temporaries (rvalues) can only bind to **const references**, not non-const references.
+
+So `Thing&` ❌ cannot bind to `Thing(10)`.
+But `const Thing&` ✅ can.
+
+---
+
+### ✅ Fix:
+
+Change your operator to take a **const reference**:
+
+```cpp
+Thing operator+(const Thing& obj)
+{
+    Thing temp(*this);     // copy current object
+    temp.x += obj.x;       // add values
+    cout << "Operator+ called\n";
+    return temp;           // return a new Thing (by value)
+}
+```
+
+---
+
+### 💡 Full working code:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Thing {
+public:
+    int x = 0;
+
+    Thing(int x) : x(x) {
+        cout << "para\n";
+    }
+
+    Thing(const Thing& obj) {
+        cout << "Copy\n";
+        this->x = obj.x;
+    }
+
+    Thing operator+(const Thing& obj) {
+        Thing temp(*this);
+        temp.x += obj.x;
+        cout << "Hello after one copy\n";
+        return temp;
+    }
+};
+
+int main() {
+    Thing one = 1;
+    Thing two = 2;
+    cout << "Now\n";
+    Thing three = one + 10;   // works now!
+    cout << "One: " << one.x << endl;
+    cout << "Three: " << three.x << endl;
+    return 0;
+}
+```
+
+---
+
+### 🧾 Output (approx):
+
+```
+para
+para
+Now
+para
+Copy
+Hello after one copy
+One: 1
+Three: 11
+```
+
+---
+
+### 🧩 Why it works now
+
+1. `10` → implicitly converted to `Thing(10)` (temporary)
+2. That temporary binds to `const Thing& obj`
+3. Inside operator+, we create a new `Thing temp` and return it by value
+4. `three` gets a new `Thing` with value `1 + 10 = 11`
+
+---
+
