@@ -45,6 +45,7 @@ public:
     char* getLastName() {
         return lastname;
     }
+    
 };
 //  int strLen(const char* arr){
 //         int len = 0;
@@ -53,6 +54,18 @@ public:
 //         }
 //         return len;
 //     }
+void setName(const char* name){
+    for(int i =0; name[i]!= '\0'; i++){
+        cout<<name[i]<<" ";
+    }
+    cout<<endl;
+    char* new_Name = (char*)name;
+    for(int i = 0;name[i] != '\0'; i++){
+        cout<<new_Name[i]<<" ";
+    }
+    cout<<endl;
+    cout<<new_Name<<endl;
+}
 int main() {
 //   const char* name = (const char*)"Imran Butt";
 //   if(name){
@@ -60,8 +73,21 @@ int main() {
 //   }else{
 //     cout<<"False"<<endl;
 //   }
-    Name name((char*)"Imran",(char*)"Butt");
-    cout<<name.getFirstName()<<endl;
-    cout<<name.getLastName()<<endl;
+    // Name name((char*)"Imran",(char*)"Butt");
+    // cout<<name.getFirstName()<<endl;
+    // cout<<name.getLastName()<<endl;
+    char* data = new char[1];
+    data[0] = '\0';
+    if(data){
+        cout<<"True"<<endl;
+    }else{
+        cout<<"False\n";
+    }
+    int len = 0;
+    for(int i = 0; data[i] != '\0'; i++){
+        len++;
+    }
+    cout<<len<<endl;
+    //setName("Imran Butt");
     return 0;
 }
