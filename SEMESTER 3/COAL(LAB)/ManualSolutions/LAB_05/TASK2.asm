@@ -1,0 +1,35 @@
+.MODEL SMALL
+
+.DATA
+
+ARR1 DW 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+
+ARR2 DW 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+   
+RESULT DW 20 DUP(0)
+
+.CODE           
+
+MOV AX,@DATA
+
+MOV DS,AX
+
+MOV SI,0
+
+MOV DX,0       
+
+MOV CX,20
+
+MY_LOOP:
+    
+    MOV DX,[ARR1 + SI]
+    
+    ADD DX,[ARR2 + SI]
+    
+    MOV [RESULT + SI],DX
+    
+    ADD SI,2
+    
+LOOP MY_LOOP 
+
+   

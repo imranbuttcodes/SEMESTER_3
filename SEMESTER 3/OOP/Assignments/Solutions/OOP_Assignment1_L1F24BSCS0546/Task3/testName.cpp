@@ -46,8 +46,8 @@ using namespace std;
     cout<<"First Name: "<<n4.getFirstName()<<endl;
     cout<<"Last Name: "<<n4.getLastName()<<endl;
     n4.display();
-    Name n5((char*)"  ", (char*)"123");
-    cout << "Is n5(object's name) valid? "<< endl;
+    Name n5((char*)"@", (char*)"123");
+    cout << "Is n5(object's name: @123 ) valid? "<< endl;
     if(n5.isValidName()){
         cout<<"Invalid Name!"<<endl;
     }else{
