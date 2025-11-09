@@ -14,8 +14,7 @@ int main() {
     cout << endl;
     b3.display();
     cout << endl;
-
-    
+    Book b5(b3,true);
     cout << "\nApplying 20% discount on '" << b1.getTitle() << "'...\n";
     b1.applyDiscount(20);
     cout << "After Discount:\n";

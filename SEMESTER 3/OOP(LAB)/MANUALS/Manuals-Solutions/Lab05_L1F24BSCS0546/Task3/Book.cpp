@@ -24,10 +24,16 @@ int Book::strLen(char* arr){
     }
     return len;
 }
-Book::Book(const Book& other){
+Book::Book(Book& other,bool isDeep){
+    if(isDeep){
     this->title = copyData((char*)other.title);
     this->auther = copyData((char*)other.auther);
     price = other.price;
+    }else{
+        this->title = other.title;//shallow
+        this->auther = other.auther;//shallow
+        this->price = other.price;
+    }
 }
 void Book::setTitle(const char* title){
     if(this->title){

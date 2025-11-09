@@ -8,7 +8,7 @@ private:
 public:
 	Book();
 	Book(const char* title, char* auther, float price);
-	Book(const Book& other);
+	Book(Book& other,bool isDeep);
 	void setTitle(const char* title);
 	void setAuther(char* auther);
 	void setPrice(float price);

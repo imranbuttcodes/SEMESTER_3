@@ -1,0 +1,46 @@
+.model small
+.stack 100h
+.data
+
+NUM1 DB 25H
+
+NUM2 DB 15H
+
+SUM DB 0
+
+DIFF DB 0
+
+.CODE 
+
+MOV AX,@DATA
+
+MOV DS,AX
+
+MOV DL,[NUM1]  
+
+ADD DL,[NUM2]
+
+MOV [SUM],DL
+
+MOV DL,[NUM1]
+
+SUB DL,[NUM2]
+
+MOV [DIFF],DL
+
+
+
+MOV BX, OFFSET SUM   
+
+
+MOV AH,0H
+
+MOV AL,[BX] ;SUM
+
+MOV BX,OFFSET  DIFF
+
+MOV DL,[BX];DIFFERENCE 
+
+
+
+
