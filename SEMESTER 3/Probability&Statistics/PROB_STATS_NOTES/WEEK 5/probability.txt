@@ -1,0 +1,119 @@
+## 🎲 What Is Probability?
+
+**Probability** measures how *likely* an event is to happen.
+It is always a number between **0 and 1**.
+
+| Probability | Meaning                          |
+| ----------- | -------------------------------- |
+| 0           | Impossible (will never happen)   |
+| 1           | Certain (will definitely happen) |
+| 0.5         | Equally likely / 50–50 chance    |
+
+Example:
+If you toss a coin, the probability of getting **Heads** is
+[
+P(\text{Heads}) = \frac{1}{2} = 0.5
+]
+
+---
+
+## 🎯 Basic Terms You Must Know
+
+Let’s go one by one:
+
+---
+
+### 1️⃣ **Experiment**
+
+An **experiment** is any **process** that leads to a result or an outcome that cannot be predicted with certainty.
+
+> You perform it → it gives one of many possible outcomes.
+
+**Examples:**
+
+* Tossing a coin
+* Rolling a die
+* Picking a card from a deck
+* Measuring the temperature tomorrow
+
+---
+
+### 2️⃣ **Outcome**
+
+An **outcome** is a **single possible result** of an experiment.
+
+**Examples:**
+
+* Coin toss → “Head” is an outcome.
+* Rolling a die → “4” is an outcome.
+* Picking a card → “Ace of Spades” is an outcome.
+
+---
+
+### 3️⃣ **Sample Space (S)**
+
+The **sample space** is the **set of all possible outcomes** of an experiment.
+
+**Examples:**
+
+| Experiment      | Sample Space (S)   |
+| --------------- | ------------------ |
+| Coin toss       | {Head, Tail}       |
+| Rolling a die   | {1, 2, 3, 4, 5, 6} |
+| Tossing 2 coins | {HH, HT, TH, TT}   |
+| Drawing a card  | {all 52 cards}     |
+
+---
+
+### 4️⃣ **Event (E)**
+
+An **event** is **a set of outcomes** that you are interested in.
+
+It can include **one** or **more** outcomes.
+
+**Examples:**
+
+* Event A: Getting a Head → {H}
+* Event B: Getting an even number when rolling a die → {2, 4, 6}
+* Event C: Getting a number less than 3 → {1, 2}
+
+So,
+[
+\text{Event} \subseteq \text{Sample Space}
+]
+
+---
+
+### 5️⃣ **Probability of an Event**
+
+If all outcomes in the sample space are **equally likely**, then:
+
+[
+P(E) = \frac{\text{Number of outcomes in E}}{\text{Total number of outcomes in S}}
+]
+
+**Example:**
+Rolling a die, find probability of getting an even number:
+
+[
+E = {2, 4, 6}, \quad S = {1,2,3,4,5,6}
+]
+
+[
+P(E) = \frac{3}{6} = 0.5
+]
+
+---
+
+### 🔹 Summary Table
+
+| Term             | Meaning                     | Example (rolling a die) |
+| ---------------- | --------------------------- | ----------------------- |
+| Experiment       | Process that gives outcomes | Roll the die            |
+| Outcome          | A single result             | “4”                     |
+| Sample Space (S) | All possible outcomes       | {1,2,3,4,5,6}           |
+| Event (E)        | Desired outcomes            | Even numbers = {2,4,6}  |
+| Probability      | Likelihood of event         | 3/6 = 0.5               |
+
+---
+

@@ -1,0 +1,227 @@
+Perfect timing bro 🔥 — yes, now that you’ve fully understood **registers**, **segments**, and their roles in memory, it’s exactly the right moment to move on to the **8086 programming model** — that means learning **how all these components fit together** inside a real Assembly program.
+
+Let’s start from the **structure** of an Assembly program, and I’ll explain every single line in depth — even what `.model`, `.stack`, `.data`, and `.code` truly mean at the hardware level.
+
+---
+
+## 🧠 The x8086 Programming Model (Overview)
+
+The 8086 microprocessor uses:
+
+* **Registers** (for fast operations)
+* **Memory Segments** (for data/code organization)
+* **Instructions** (Assembly language commands)
+* **Memory Models** (for how code/data/stack are arranged)
+
+Now, when we write an Assembly program for x8086, it usually has this structure:
+
+```asm
+.model small        ; Select the memory model
+.stack 100h         ; Define stack size (256 bytes)
+.data               ; Start of data segment
+msg db "Hello", "$" ; Declare data variables
+.code               ; Start of code segment
+main proc           ; Define the main procedure
+    mov ax, @data   ; Initialize data segment
+    mov ds, ax
+    mov ah, 9
+    lea dx, msg
+    int 21h         ; Display string
+    mov ah, 4Ch
+    int 21h         ; Exit program
+main endp
+end main
+```
+
+---
+
+Let’s break it down **line-by-line in full detail** 👇
+
+### 1️⃣ `.model small`
+
+* `.model` defines the **memory model**, i.e., how your program will use **code** and **data segments**.
+* 8086 supports several memory models:
+
+  | Model   | Code Segment                  | Data Segment          | Max Size    |
+  | ------- | ----------------------------- | --------------------- | ----------- |
+  | tiny    | 1 segment (shared)            | 1 segment (shared)    | 64 KB total |
+  | small   | 1 code + 1 data               | 1 each                | 64 KB each  |
+  | medium  | multiple code, one data       | multiple 64 KB code   |             |
+  | compact | one code, multiple data       | multiple 64 KB data   |             |
+  | large   | multiple code + multiple data | unlimited (segmented) |             |
+
+💡 **In .model small**, both code and data fit in one 64KB segment each — perfect for small programs (typical for learning).
+
+---
+
+### 2️⃣ `.stack 100h`
+
+* Defines **stack segment size** — here `100h` = 256 bytes.
+* The assembler automatically creates a **stack segment** of that size.
+* The **stack segment register (SS)** points to it.
+* The **stack pointer (SP)** register keeps track of the top of the stack.
+
+🧠 Think of the stack as temporary storage for:
+
+* Function calls (return addresses)
+* Local variables
+* Register saving
+
+---
+
+### 3️⃣ `.data`
+
+* Marks the **start of data segment**.
+* All variables, constants, arrays, strings are declared here.
+* The assembler assigns them memory locations inside the **Data Segment (DS)**.
+
+Example:
+
+```asm
+msg db "Hello", "$"
+num dw 1234h
+```
+
+> `msg` is a byte variable (db = define byte)
+> `num` is a word variable (dw = define word = 2 bytes)
+
+---
+
+### 4️⃣ `.code`
+
+* Marks the **start of code segment** (CS).
+* All instructions from here will be stored in memory under the **Code Segment (CS)**.
+
+---
+
+### 5️⃣ `main proc` / `main endp`
+
+* Defines a **procedure** named `main` (like `int main()` in C++).
+* `proc` and `endp` tell the assembler where the procedure starts and ends.
+
+---
+
+### 6️⃣ `mov ax, @data`
+
+* `@data` is a **label** created by the assembler for the data segment address.
+* Loads the **starting address of data segment** into AX register.
+
+Then:
+
+```asm
+mov ds, ax
+```
+
+copies it into the **DS register** — now all data accesses (like `msg`) will be through this data segment.
+
+---
+
+### 7️⃣ `int 21h`
+
+* It’s a **DOS interrupt** — used for system-level operations.
+* `AH` defines what function to perform.
+
+Examples:
+
+| AH  | Function       | Description                 |
+| --- | -------------- | --------------------------- |
+| 09h | Display String | Print `$`-terminated string |
+| 4Ch | Exit Program   | Return to DOS               |
+
+---
+
+### 8️⃣ `end main`
+
+* Tells assembler where the program ends and which procedure is the **entry point** (the first to run).
+
+---
+
+✅ **In summary:**
+
+| Directive   | Purpose                   |
+| ----------- | ------------------------- |
+| `.model`    | Defines memory model      |
+| `.stack`    | Defines stack size        |
+| `.data`     | Variable declarations     |
+| `.code`     | Instructions area         |
+| `proc/endp` | Procedure boundaries      |
+| `end`       | Program end + entry point |
+
+---
+
+Excellent catch bro 🔥 — this is exactly the kind of **deep observation** that makes a true computer engineer.
+Let’s break it down slowly and precisely so you understand every single detail of this apparent contradiction.
+
+---
+
+## 🧩 First, let’s restate what `.MODEL` does
+
+The `.MODEL` directive in MASM / TASM tells the assembler:
+
+> “How the program’s **code**, **data**, and **stack** segments will be organized and linked.”
+
+In other words, `.MODEL` defines the **memory layout** for your program.
+
+---
+
+## ⚙️ The 8086 Memory Limitation
+
+8086 can **only access 64 KB per segment** —
+because segment registers are 16 bits wide, and the offset is 16 bits →
+maximum address range per segment = **64 KB**.
+
+So to manage programs larger than 64 KB, programmers used different **memory models**.
+
+---
+
+## 🧱 Now, about `.MODEL SMALL`
+
+Here’s the **correct and complete explanation** 👇
+
+| Component      | Meaning                                                     |
+| -------------- | ----------------------------------------------------------- |
+| `.MODEL SMALL` | Program uses **one data segment** and **one code segment**. |
+| Code segment   | Max 64 KB of instructions (pointed by `CS`)                 |
+| Data segment   | Max 64 KB of variables (pointed by `DS`)                    |
+
+So in total, your program can have **64 KB of code** + **64 KB of data** = **128 KB total memory space** (not counting stack).
+
+---
+
+### ✅ So what I meant:
+
+> “Both code and data fit in one 64 KB segment each”
+> means:
+
+* The **code** lives in **one** 64 KB segment (its own, separate)
+* The **data** lives in **one** 64 KB segment (its own, separate)
+* So yes, they are **separate segments**, but each segment is **limited to 64 KB**
+
+---
+
+### 🚫 Not this:
+
+> “Both code and data share one single 64 KB segment” ❌
+> That would actually be the **.MODEL TINY**, not small.
+
+---
+
+## 🧭 Summary Table (Fixed & Clarified)
+
+| Model            | Code Segments        | Data Segments        | Explanation                                                  |
+| ---------------- | -------------------- | -------------------- | ------------------------------------------------------------ |
+| **TINY**         | 1 (shared with data) | 1 (shared with code) | Everything (code + data) in *one single 64 KB segment*       |
+| **SMALL**        | 1                    | 1                    | One code segment (64 KB) + one data segment (64 KB)          |
+| **MEDIUM**       | Many                 | 1                    | Code may exceed 64 KB, data limited to 64 KB                 |
+| **COMPACT**      | 1                    | Many                 | Data may exceed 64 KB, code limited to 64 KB                 |
+| **LARGE / HUGE** | Many                 | Many                 | Both code and data can exceed 64 KB (segmented organization) |
+
+---
+
+## 💡 In short:
+
+* `.MODEL SMALL` = **Two separate 64 KB spaces** (one for code, one for data)
+* `.MODEL TINY` = **One shared 64 KB space** (code + data together)
+
+---
+

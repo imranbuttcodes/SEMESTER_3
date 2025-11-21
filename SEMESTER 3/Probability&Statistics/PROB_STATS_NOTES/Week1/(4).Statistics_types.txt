@@ -1,0 +1,76 @@
+# 🎓 Lecture 2: Types of Statistics
+
+Statistics, as we defined earlier, is the science of **collecting, organizing, analyzing, and interpreting data**.
+Broadly, it is divided into **two main types**:
+
+---
+
+## 1️⃣ **Descriptive Statistics**
+
+👉 Purpose: **Summarize and describe data**.
+
+* It does not make predictions, only **explains what the data shows**.
+* Useful when you just want to get an overall picture.
+
+### 🔹 Examples:
+
+* **Measures of Central Tendency** → Mean, Median, Mode.
+* **Measures of Dispersion** → Range, Variance, Standard Deviation, Interquartile Range (IQR).
+* **Data Visualization** → Bar charts, Histograms, Pie charts, Box plots.
+
+💡 Example:
+We surveyed 100 students about their daily screen time.
+
+* Mean screen time = 5 hours.
+* Standard deviation = 1.2 hours.
+* Histogram shows most students spend 4–6 hours.
+
+This is *descriptive* → it describes the data you already have.
+
+---
+
+## 2️⃣ **Inferential Statistics**
+
+👉 Purpose: **Make predictions or decisions about a population, based on a sample**.
+
+* Works with **probability theory**.
+* Instead of just describing, it tries to **infer** conclusions about the whole population.
+
+### 🔹 Key Concepts:
+
+* **Population vs. Sample**
+
+  * *Population* → the whole group (all university students).
+  * *Sample* → a subset taken from the population (say, 200 students).
+* **Sampling Methods** → random sampling, stratified sampling, etc.
+* **Estimation** → Point estimate (mean), Confidence Intervals.
+* **Hypothesis Testing** → t-test, chi-square test, ANOVA.
+
+💡 Example:
+Instead of checking screen time of *all students in Pakistan* (impossible), we sample 500 students.
+
+* Sample mean = 5.1 hours.
+* Inferential stats: “We are 95% confident that the average screen time for all students in Pakistan is between 4.9 and 5.3 hours.”
+
+This is *inferential* → it makes predictions/generalizations.
+
+---
+
+## ⚖️ **Comparison Table**
+
+| Feature         | Descriptive Stats 📝              | Inferential Stats 🔮                                 |
+| --------------- | --------------------------------- | ---------------------------------------------------- |
+| **Goal**        | Summarize data                    | Make predictions about population                    |
+| **Data needed** | Whole dataset                     | Sample from dataset                                  |
+| **Techniques**  | Mean, Median, Std Dev, Graphs     | Hypothesis Testing, Confidence Intervals, Regression |
+| **Example**     | “Average student height = 170 cm” | “True average height is likely between 168–172 cm”   |
+
+---
+
+✅ **In short:**
+
+* **Descriptive Statistics** → *What happened?*
+* **Inferential Statistics** → *What will happen (generalization)?*
+
+---
+

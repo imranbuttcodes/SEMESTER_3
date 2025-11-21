@@ -1,0 +1,76 @@
+Perfect bro 👌 now we’ll move to **displacement vector**, which is a very natural step after position & direction vectors.
+
+---
+
+# 📘 **Displacement Vector**
+
+---
+
+### 1. **Definition**
+
+A **displacement vector** represents the change in position of an object when it moves from one point to another.
+
+* If an object moves from point (P(x_1, y_1, z_1)) to point (Q(x_2, y_2, z_2)), the displacement vector is:
+
+[
+\vec{D} = \vec{PQ} = \langle x_2 - x_1, ; y_2 - y_1, ; z_2 - z_1 \rangle
+]
+
+So mathematically, **displacement vector = direction vector from initial point to terminal point**.
+
+---
+
+### 2. **Difference from Position Vector**
+
+* **Position vector** locates a point relative to the origin.
+  Example: (Q(-5, 2, 2)) → position vector is (\vec{OQ} = \langle -5, 2, 2 \rangle).
+
+* **Displacement vector** measures how much you moved when going from one point to another.
+  Example: From (P(-3, 4, 1)) to (Q(-5, 2, 2)) → displacement is (\vec{PQ} = \langle -2, -2, 1 \rangle).
+
+---
+
+### 3. **Geometric Meaning**
+
+Think of yourself standing at (P).
+
+* You walk to (Q).
+* The **arrow** from (P) to (Q) is the displacement vector.
+* It shows both:
+
+  * **how far** you moved (magnitude)
+  * **in which direction** you moved
+
+---
+
+### 4. **Magnitude of Displacement Vector**
+
+The length of the displacement vector gives the **distance between the two points**:
+
+[
+|\vec{PQ}| = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}
+]
+
+---
+
+### 5. **Example**
+
+Let’s use your same points:
+( P(-3, 4, 1), ; Q(-5, 2, 2) ).
+
+Displacement vector:
+[
+\vec{PQ} = \langle -2, -2, 1 \rangle
+]
+
+Magnitude (distance):
+[
+|\vec{PQ}| = \sqrt{(-2)^2 + (-2)^2 + (1)^2}
+= \sqrt{4 + 4 + 1}
+= \sqrt{9} = 3
+]
+
+✅ So the displacement is an arrow (\langle -2, -2, 1 \rangle) with length 3.
+
+---
+

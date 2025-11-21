@@ -1,0 +1,79 @@
+Excellent question bro 🙌 this shows you’re thinking critically!
+
+Let’s go step by step:
+
+---
+
+# 📊 What if Dataset Has Odd Number of Observations?
+
+The **number of observations (n)** being odd or even does **not** affect how we calculate **class width (h)**.
+👉 Why? Because class width depends on the **range (R)** and the **number of classes (k)**, not whether ( n ) is odd or even.
+
+---
+
+## 🔹 Process Recap
+
+1. **Range (R):**
+   [
+   R = \text{Max} - \text{Min}
+   ]
+
+2. **Number of classes (k):**
+   [
+   k = 1 + 3.322 \log_{10}(n)
+   ]
+
+* Here ( n ) can be odd or even, doesn’t matter.
+* This gives an approximate number of classes.
+
+3. **Class width (h):**
+   [
+   h = \frac{R}{k}
+   ]
+   Then **round up** to the next whole/convenient number.
+
+---
+
+## 🔹 Example with Odd n
+
+Dataset (n = 15 students’ marks):
+`6, 9, 12, 15, 18, 20, 22, 25, 28, 29, 33, 36, 40, 43, 47`
+
+* **Range (R):**
+  [
+  R = 47 - 6 = 41
+  ]
+
+* **Number of Classes (k):**
+  [
+  k = 1 + 3.322 \log_{10}(15) \approx 1 + 3.322(1.176) \approx 4.9 \approx 5
+  ]
+
+* **Class Width (h):**
+  [
+  h = \frac{41}{5} \approx 8.2 \quad \Rightarrow \quad 9
+  ]
+
+So intervals would be:
+6–14, 15–23, 24–32, 33–41, 42–50
+
+✔ All 15 values fit neatly.
+
+---
+
+## 🔹 Key Point
+
+👉 Whether ( n = 15 ) (odd) or ( n = 16 ) (even), the formula works the same.
+The **oddness or evenness of n only matters** when you’re calculating things like **median** (since median depends on whether you pick the middle value or the average of two).
+
+But for **frequency distributions**, we only care about **range and number of classes**.
+
+---
+
+✅ So short answer:
+Odd or even number of data points does **not** affect the width of classes. You always calculate width the same way:
+[
+h = \frac{R}{k}, \quad \text{round up.}
+]
+
+---

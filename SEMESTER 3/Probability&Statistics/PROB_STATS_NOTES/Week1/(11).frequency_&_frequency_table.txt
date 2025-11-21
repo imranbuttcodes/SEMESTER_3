@@ -1,0 +1,85 @@
+Perfect timing, bro 🚀. After learning about **data types and scales**, the **next natural step** is to organize data → that’s where **frequency & frequency distribution tables** come in. Let’s go “university style”:
+
+---
+
+# 📊 Frequency & Frequency Distribution
+
+### 1. **Frequency (f)**
+
+* **Definition:** The number of times a value (or category) occurs in a dataset.
+* Example:
+  Dataset of students’ favorite fruit = {Apple, Mango, Mango, Banana, Apple, Apple}
+
+  * Apple → 3
+  * Mango → 2
+  * Banana → 1
+    ✔ These counts are **frequencies**.
+
+---
+
+### 2. **Frequency Distribution**
+
+* A way of **organizing data** into a table showing each distinct value/category and how often it appears.
+* Helps to **summarize large datasets** and **visualize patterns**.
+
+**Basic Frequency Distribution Table Example:**
+
+| Fruit  | Frequency (f) |
+| ------ | ------------- |
+| Apple  | 3             |
+| Mango  | 2             |
+| Banana | 1             |
+
+---
+
+### 3. **Relative Frequency**
+
+* Shows the **proportion** (or percentage) of times a value occurs relative to total data.
+  [
+  \text{Relative Frequency} = \frac{\text{Frequency}}{\text{Total Observations}}
+  ]
+
+For the fruit example (total = 6):
+
+* Apple: 3/6 = 0.5 (50%)
+* Mango: 2/6 = 0.33 (33.3%)
+* Banana: 1/6 = 0.17 (16.7%)
+
+---
+
+### 4. **Cumulative Frequency**
+
+* Shows the **running total** of frequencies up to a certain class/point.
+* Useful in ordered data (scores, ages, income, etc.).
+
+Example: Test scores of 10 students:
+{5, 6, 7, 7, 8, 8, 8, 9, 10, 10}
+
+| Score | Frequency (f) | Cumulative Frequency (CF) |
+| ----- | ------------- | ------------------------- |
+| 5     | 1             | 1                         |
+| 6     | 1             | 2                         |
+| 7     | 2             | 4                         |
+| 8     | 3             | 7                         |
+| 9     | 1             | 8                         |
+| 10    | 2             | 10                        |
+
+---
+
+### 5. **Grouped Frequency Distribution**
+
+* When data is **large/continuous**, we make **class intervals**.
+* Example: Marks of 50 students (0–100) → group into intervals like 0–9, 10–19, 20–29 … etc.
+
+---
+
+✅ In short:
+
+* **Frequency** = count
+* **Relative frequency** = proportion/percentage
+* **Cumulative frequency** = running total
+* **Grouped frequency** = intervals for continuous/large data
+
+---
+
+to learn in a best way or more deep vist week1.pdf

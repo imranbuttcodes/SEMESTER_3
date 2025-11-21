@@ -1,0 +1,110 @@
+Absolutely. Jumps are essential for creating loops and decision-making structures (like `if` statements).
+
+In 8086, jump instructions work by changing the value of the **Instruction Pointer (IP) register**. The IP register always points to the memory address of the *next* instruction to be executed. A jump simply puts a new address into the IP, causing the CPU to "jump" to that new location.
+
+There are two main categories of jumps:
+
+1.  **Unconditional Jumps**
+2.  **Conditional Jumps**
+
+-----
+### 1\. Unconditional Jump (`JMP`)
+
+This is the simplest jump. It **always** transfers control to the target address, no matter what. It's like the `goto` statement in C++.
+
+  * **Instruction:** `JMP target_label`
+  * **How it works:** The CPU updates the IP register to point to the address of `target_label` and continues execution from there.
+
+**Example:**
+ 
+```assembly
+    ...         ; some code
+    JMP skip_over
+    
+    ; This part gets skipped
+    MOV AX, 5
+    ADD BX, AX
+    
+skip_over:
+    ; Execution jumps directly to here
+    MOV CX, 1
+    ...
+```
+
+(Technically, `JMP` can be `SHORT`, `NEAR`, or `FAR`, which just defines how far away the target is, but the logic is the same.)
+
+-----
+
+### 2\. Conditional Jumps (`Jcc`)
+
+This is where the **FLAGS register** we just revised becomes critical.
+
+Conditional jumps **only** transfer control *if* a specific condition (based on the flags) is true. If the condition is false, the CPU just ignores the jump and moves to the very next instruction.
+
+These are almost always used after a `CMP` (Compare) or `TEST` instruction, which sets the flags without changing any registers.
+
+Here’s a breakdown of the most common ones, grouped by what they check.
+
+#### 🔎 Group 1: Jumps Based on Single Flags
+
+These check the state of one specific flag.
+
+| Instruction | Jumps if... | Flag Checked | Common Use |
+| :--- | :--- | :--- | :--- |
+| `JZ` (Jump if Zero) | Result was zero | **ZF = 1** | "is equal" |
+| `JNZ` (Jump if Not Zero) | Result was not zero | **ZF = 0** | "is not equal" |
+| `JS` (Jump if Sign) | Result was negative | **SF = 1** | "is negative" |
+| `JNS` (Jump if Not Sign) | Result was positive | **SF = 0** | "is positive" |
+| `JC` (Jump if Carry) | A carry occurred | **CF = 1** | Unsigned overflow |
+| `JNC` (Jump if No Carry) | No carry occurred | **CF = 0** | No unsigned overflow |
+| `JO` (Jump if Overflow) | A signed overflow occurred | **OF = 1** | Signed overflow |
+| `JNO` (Jump if No Overflow) | No signed overflow occurred | **OF = 0** | No signed overflow |
+| `JP` (Jump if Parity) | Parity is even | **PF = 1** | Error checking |
+| `JNP` (Jump if No Parity) | Parity is odd | **PF = 0** | Error checking |
+
+> **Key Concept:** After `CMP AX, BX`, the `JZ` instruction is often read as "Jump if Equal" (`JE`) and `JNZ` as "Jump if Not Equal" (`JNE`). `JZ` and `JE` are literally the same instruction (same opcode).
+
+-----
+
+#### ⚖️ Group 2: Jumps for Unsigned Comparisons
+
+Use these after a `CMP` when you are comparing two **unsigned** numbers (like memory addresses or simple counters). They primarily rely on the **Carry (CF)** and **Zero (ZF)** flags.
+
+| Instruction | Jumps if... | Flags Checked |
+| :--- | :--- | :--- |
+| `JE` / `JZ` | Equal (A = B) | ZF = 1 |
+| `JNE` / `JNZ` | Not Equal (A ≠ B) | ZF = 0 |
+| `JA` / `JNBE` | Above (A \> B) | CF = 0 and ZF = 0 |
+| `JAE` / `JNB` | Above or Equal (A ≥ B) | CF = 0 |
+| `JB` / `JNAE` | Below (A \< B) | CF = 1 |
+| `JBE` / `JNA` | Below or Equal (A ≤ B) | CF = 1 or ZF = 1 |
+
+-----
+
+#### 🔢 Group 3: Jumps for Signed Comparisons
+
+Use these after a `CMP` when comparing **signed** numbers (positive or negative values). They rely on the **Sign (SF)**, **Overflow (OF)**, and **Zero (ZF)** flags.
+
+| Instruction | Jumps if... | Flags Checked |
+| :--- | :--- | :--- |
+| `JE` / `JZ` | Equal (A = B) | ZF = 1 |
+| `JNE` / `JNZ` | Not Equal (A ≠ B) | ZF = 0 |
+| `JG` / `JNLE` | Greater (A \> B) | SF = OF and ZF = 0 |
+| `JGE` / `JNL` | Greater or Equal (A ≥ B) | SF = OF |
+| `JL` / `JNGE` | Less (A \< B) | SF ≠ OF |
+| `JLE` / `JNG` | Less or Equal (A ≤ B) | SF ≠ OF or ZF = 1 |
+
+-----
+
+#### 🔄 Group 4: Special Jumps
+
+  * `JCXZ` (Jump if CX is Zero): This is a special one. It jumps *only if* the **CX register is exactly 0**. It does *not* check the flags. It's often used at the beginning of a loop to skip it entirely if the loop count is 0.
+
+  * `LOOP`: This is a "loop" instruction that does three things at once:
+
+    1.  Decrements `CX`.
+    2.  Checks if `CX` is 0.
+    3.  Jumps to a label *if* `CX` is **not** 0.
+        It's a combined `DEC CX` and `JNZ` in one.
+
+This covers the fundamentals of how 8086 programs make decisions and create loops.

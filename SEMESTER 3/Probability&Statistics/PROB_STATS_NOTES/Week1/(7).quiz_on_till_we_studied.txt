@@ -1,0 +1,79 @@
+Nice idea bro 🔥 like a proper **university quiz** to check understanding before moving further.
+We’ve covered so far:
+
+* Motivation of Probability & Stats
+* Formal Definitions (Probability, Statistics)
+* Types of Statistics (Descriptive vs Inferential)
+* Population, Sample, Parameter, Statistic
+* Variables & Types of Data (Qualitative, Quantitative)
+
+---
+
+# 📑 Quiz 1 – Fundamentals of Probability & Statistics
+
+### **Section A – Conceptual (MCQs)**
+
+**Q1.** Which of the following best defines *probability*?
+a) Study of averages only
+b) Study of uncertainty and chance
+c) Study of numbers only
+d) Collecting data
+
+**Q2.** Which branch of statistics is used to make predictions about a population based on a sample?
+a) Descriptive Statistics
+b) Inferential Statistics
+c) Probability
+d) Data Visualization
+
+**Q3.** The true average height of all students in your university is an example of:
+a) Statistic
+b) Parameter
+c) Variable
+d) Sample
+
+**Q4.** A researcher surveys 100 students to estimate the average GPA of all students in UCP. The 100 students represent:
+a) Population
+b) Sample
+c) Parameter
+d) Variable
+
+**Q5.** Which of the following is a **continuous variable**?
+a) Number of siblings
+b) Shoe size (7, 8, 9, …)
+c) Height in cm
+d) Number of cars in a parking lot
+
+---
+
+### **Section B – True/False**
+
+**Q6.** Statistics can only describe data but not make predictions. (T/F)
+**Q7.** Ordinal variables have order but no fixed difference between values. (T/F)
+**Q8.** Every statistic is also a parameter. (T/F)
+**Q9.** Probability starts with data and infers the model. (T/F)
+**Q10.** Blood group is an example of a qualitative nominal variable. (T/F)
+
+---
+
+### **Section C – Short Answer**
+
+**Q11.** Define *population* and *sample* with your own examples.
+**Q12.** Differentiate between parameter and statistic with an example.
+**Q13.** What is the difference between descriptive and inferential statistics?
+**Q14.** Give one real-life example of a discrete variable and one continuous variable.
+**Q15.** Explain the difference between qualitative (nominal/ordinal) and quantitative (discrete/continuous) variables.
+
+---
+
+### **Section D – Applied Problem**
+
+**Q16.** You are studying daily screen time of students:
+
+* Collected data from 10 randomly selected students (in hours):
+  4.5, 6, 5, 5.5, 7, 6.5, 5, 4, 6, 5.5
+
+  a) What is the **sample mean** screen time?
+  b) Is this value a **statistic** or **parameter**? Why?
+  c) Identify the type of variable being measured.
+
+---

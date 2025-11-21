@@ -1,0 +1,184 @@
+Perfect bro 👑 we’ll cover **both** — step by step — because they’re deeply connected.
+Let’s begin with the **Fetch–Decode–Execute Cycle**, and then move to **Memory Organization** (how data/instructions are arranged and accessed).
+
+---
+
+# ⚙️ 1. The Fetch–Decode–Execute Cycle
+
+This is the **heart of the CPU’s operation** — the repeating process through which the CPU runs every single instruction.
+
+You can think of it as:
+
+> 🧠 CPU = Brain
+> 📖 Program = List of Instructions
+> 🔁 Cycle = How CPU “reads → understands → acts” on each instruction
+
+---
+
+## 🧩 Step 1: **Fetch**
+
+👉 The CPU **fetches** (reads) the next instruction from **memory**.
+
+🔹 Involved components:
+
+* **Program Counter (PC):** holds the address of the next instruction.
+* **Memory Address Register (MAR):** temporarily holds that address.
+* **Memory Data Register (MDR):** holds the fetched instruction.
+* **Instruction Register (IR):** stores the instruction currently being executed.
+
+🔹 Step-by-step:
+
+1. **PC → MAR:** Address of next instruction is copied to MAR.
+2. **Address Bus:** carries that address to memory.
+3. **Control Bus:** sends a `READ` signal.
+4. **Memory → Data Bus:** sends the instruction to MDR.
+5. **MDR → IR:** instruction is stored for decoding.
+6. **PC++:** incremented to point to the next instruction.
+
+🧠 Example:
+
+```
+PC = 2004
+Fetch instruction at address 2004 → MOV A, B
+```
+
+---
+
+## 🧮 Step 2: **Decode**
+
+👉 The **Control Unit (CU)** interprets what the instruction means.
+
+* The **Opcode** part (e.g., MOV, ADD, SUB) tells the CPU *what operation* to do.
+* The **Operand** part (e.g., A, B, address) tells the CPU *where* to find data.
+
+💡 Example:
+
+```
+Instruction: ADD A, B
+Opcode → ADD
+Operands → A, B
+Meaning → Add contents of register B to register A
+```
+
+Control Unit then prepares the **ALU**, **registers**, and **buses** for execution.
+
+---
+
+## ⚡ Step 3: **Execute**
+
+👉 The CPU performs the operation.
+
+Depending on the instruction, this may involve:
+
+* Performing arithmetic or logic in the **ALU**.
+* Transferring data via the **Data Bus**.
+* Storing results in memory or a register.
+
+💡 Example:
+
+```
+ADD A, B
+→ ALU adds contents of A + B
+→ Result stored back in A
+→ Status flags updated (e.g., Zero, Carry)
+```
+
+---
+
+### 🔁 The Cycle Repeats
+
+Once execution is done:
+
+```
+PC → next instruction → Fetch → Decode → Execute → Repeat
+```
+
+This happens **millions or billions of times per second** (depending on CPU clock speed).
+
+---
+
+# 🧠 2. Memory Organization
+
+Now that you know *how* CPU reads instructions, let’s see *how* data and instructions are **stored**.
+
+---
+
+## 🔹 1. Memory = Array of Storage Locations
+
+Memory is like a **huge array**:
+
+```
+Address | Data
+0000    | 10101010
+0001    | 11110000
+0002    | 01010101
+```
+
+Each **address** points to **1 byte (8 bits)** of storage.
+
+So:
+
+* 1 KB memory → 1024 addresses
+* 1 GB memory → 1,073,741,824 addresses
+
+---
+
+## 🔹 2. Instruction vs Data
+
+Both **instructions and data** are stored in the same memory — this is called the **Von Neumann Architecture**.
+
+💡 Example memory layout:
+
+```
+Address | Content
+0000    | MOV A, B   (instruction)
+0001    | ADD A, C   (instruction)
+0002    | 00000010   (data value)
+0003    | 00000101   (data value)
+```
+
+CPU doesn’t care if it’s instruction or data — the **Control Unit** interprets it correctly during decoding.
+
+---
+
+## 🔹 3. Memory Hierarchy (Speed vs Capacity)
+
+| Level             | Type        | Example       | Speed      | Capacity    |
+| ----------------- | ----------- | ------------- | ---------- | ----------- |
+| L1 Cache          | Inside CPU  | 32 KB         | 🔥 Fastest | ⚙️ Smallest |
+| L2/L3 Cache       | On CPU chip | 256 KB – 8 MB | Very fast  | Small       |
+| Main Memory (RAM) | External    | 8–32 GB       | Moderate   | Medium      |
+| Secondary         | HDD / SSD   | 1–2 TB        | Slow       | Huge        |
+
+📈 The closer to CPU → faster but smaller.
+
+---
+
+## 🔹 4. Memory Addressing
+
+Each instruction or variable has an **address**:
+
+* **Direct Addressing:** specifies actual address.
+
+  ```
+  LOAD 2004
+  ```
+* **Indirect Addressing:** address stored in another register.
+
+  ```
+  LOAD (R1) → fetch from address in R1
+  ```
+
+---
+
+## 💡 In Short:
+
+| Concept                  | Description                                |
+| ------------------------ | ------------------------------------------ |
+| **Fetch–Decode–Execute** | CPU’s instruction cycle                    |
+| **Memory Organization**  | How instructions/data are stored           |
+| **System Bus**           | Communication between CPU, memory, and I/O |
+| **Registers**            | Temporary high-speed storage inside CPU    |
+
+---
+

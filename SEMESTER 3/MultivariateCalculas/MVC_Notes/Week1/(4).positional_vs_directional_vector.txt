@@ -1,0 +1,54 @@
+Difference Recap:
+
+If a vector is drawn from the origin to a point, it’s called a position vector.
+Example: For 
+𝑄
+(
+−
+5
+,
+2
+,
+2
+)
+Q(−5,2,2), position vector is 
+𝑂
+𝑄
+⃗
+=
+⟨
+−
+5
+,
+2
+,
+2
+⟩
+OQ
+	​
+
+=⟨−5,2,2⟩.
+
+If a vector is drawn from one point to another, it’s called a direction vector (or displacement vector).
+Example: From 
+𝑃
+P to 
+𝑄
+Q, direction vector is 
+𝑃
+𝑄
+⃗
+=
+⟨
+−
+2
+,
+−
+2
+,
+1
+⟩
+PQ
+	​
+
+=⟨−2,−2,1⟩

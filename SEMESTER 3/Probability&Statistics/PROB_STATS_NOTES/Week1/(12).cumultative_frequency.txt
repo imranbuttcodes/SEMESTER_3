@@ -1,0 +1,61 @@
+ et’s break down **cumulative frequency** in a simple, clear way.
+
+---
+
+### 🔢 What is Cumulative Frequency?
+
+**Cumulative frequency** = **"Running total" of frequencies** as you go down (or up) a data list.
+
+In other words:  
+> It tells you **how many data values are less than or equal to** a particular value.
+
+---
+
+### 📊 Example to Understand It
+
+Suppose you surveyed **20 students** about how many books they read last month:
+
+| Books Read (x) | Frequency (f) | **Cumulative Frequency (cf)** |
+|----------------|---------------|-------------------------------|
+| 0              | 2             | 2                             |
+| 1              | 5             | 2 + 5 = **7**                 |
+| 2              | 6             | 7 + 6 = **13**                |
+| 3              | 4             | 13 + 4 = **17**               |
+| 4              | 3             | 17 + 3 = **20**               |
+
+✅ **How we got cumulative frequency**:
+- For **0 books**: 2 students → cf = 2
+- For **1 book**: 5 more students → total so far = 2 + 5 = **7**
+- For **2 books**: 6 more → total = 7 + 6 = **13**
+- ...and so on.
+
+So, the **cumulative frequency for "2 books" is 13**, which means:  
+> **13 students read 2 books or fewer**.
+
+---
+
+### 📈 Why Is It Useful?
+
+Cumulative frequency helps you answer questions like:
+- How many students scored **less than or equal to 75** on a test?
+- How many people are **younger than 30**?
+- What’s the **median** or **percentile** of a dataset?
+
+It’s also used to draw **ogives** (cumulative frequency graphs)—super helpful in descriptive stats!
+
+---
+
+### 🧠 Quick Tips:
+- Cumulative frequency **always increases** (or stays the same) as you go down the table.
+- The **last cumulative frequency** = **total number of observations** (e.g., 20 students).
+- There are two types:
+  - **Less than cumulative frequency** (most common — shown above)
+  - **More than cumulative frequency** (starts from the bottom and adds upward)
+
+---
+
+### ✅ Summary (Bro-to-Bro 😎):
+> **Cumulative frequency = Keep adding frequencies as you go.  
+> It shows the total count UP TO that point.**
+
+So if someone asks, “How many people got 3 or fewer mistakes?” — just look at the **cumulative frequency for 3**. Done! 💯

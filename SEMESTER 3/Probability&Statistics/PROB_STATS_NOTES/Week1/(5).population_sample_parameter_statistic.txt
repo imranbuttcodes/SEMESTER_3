@@ -1,0 +1,80 @@
+Exactly bro 💯 you’re touching the **core foundation** now — let’s formalize it university style.
+
+---
+
+# 🎓 Lecture 3: Population, Sample, Parameter, Statistic
+
+### 📌 **Population**
+
+> A **population** is the **entire collection of individuals, objects, or events** about which we want to draw conclusions.
+
+* It can be **finite** (number of students in your university) or **infinite** (number of coin toss outcomes in the future).
+* Population = **whole group** we are interested in.
+
+💡 Examples:
+
+* All students in UCP.
+* All voters in Pakistan.
+* All possible dice rolls in probability theory.
+
+---
+
+### 📌 **Sample**
+
+> A **sample** is a **subset of the population**, selected for study.
+
+* Since studying the whole population is often **impossible or impractical**, we use samples.
+* If the sample is chosen properly (random sampling), it can represent the population.
+
+💡 Examples:
+
+* 200 randomly selected UCP students (to study average GPA).
+* 1,000 voters surveyed out of millions.
+
+---
+
+### 📌 **Parameter**
+
+> A **parameter** is a **numerical value that describes the population**.
+
+* It is usually **unknown** (because we can’t study the whole population).
+* Fixed, but often not measurable directly.
+
+💡 Examples:
+
+* True average GPA of *all UCP students* (say, 3.1).
+* True percentage of voters supporting a candidate (say, 54%).
+
+---
+
+### 📌 **Statistic**
+
+> A **statistic** is a **numerical value computed from the sample data**.
+
+* Used to estimate the parameter.
+* Changes depending on which sample you take.
+
+💡 Examples:
+
+* Average GPA of your 200 sampled students (say, 3.05).
+* 1,000 surveyed voters: 52% support candidate → estimate for true population %.
+
+---
+
+## ⚖️ **Comparison Table**
+
+| Concept        | Based On             | Numerical Value Called | Example                                |
+| -------------- | -------------------- | ---------------------- | -------------------------------------- |
+| **Population** | Entire group         | **Parameter**          | True avg GPA of all UCP students = 3.1 |
+| **Sample**     | Subset of population | **Statistic**          | Avg GPA of 200 sampled students = 3.05 |
+
+---
+
+✅ **In short:**
+
+* **Population** → Whole group.
+* **Sample** → Small part of group.
+* **Parameter** → Numerical value of whole group.
+* **Statistic** → Numerical value of sample.
+
+---

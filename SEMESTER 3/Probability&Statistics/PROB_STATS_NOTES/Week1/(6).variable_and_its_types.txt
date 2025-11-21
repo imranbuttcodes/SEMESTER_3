@@ -1,0 +1,89 @@
+Perfect timing bro 🔥 because after **Population & Sample**, the next foundation in statistics is **Variables & Types of Data**. Let’s go step by step, like in a uni lecture.
+
+---
+
+# 🎓 Lecture 4: Variables and Types of Data
+
+---
+
+## 📌 What is a Variable?
+
+> A **variable** is any characteristic, number, or quantity that can be **measured or categorized** and can take different values.
+
+* Variables can be **measured** (height, weight, marks) or **classified** (gender, blood type).
+* They vary from person to person, object to object, or time to time.
+
+💡 Example:
+
+* Student height, GPA, age, major, city.
+
+---
+
+## 📌 Two Main Classifications of Variables
+
+### 1️⃣ **Qualitative (Categorical) Variables**
+
+* Describe **qualities / categories**.
+* They are **non-numeric** (usually labels).
+* Examples: Gender (Male/Female), Blood Group (A, B, AB, O), City name.
+
+🔹 Subtypes:
+
+* **Nominal** → Categories without order.
+
+  * Example: Blood group, religion, city names.
+* **Ordinal** → Categories with order/ranking, but no fixed difference.
+
+  * Example: Education level (High School < Bachelor < Master < PhD), T-shirt size (S < M < L < XL).
+
+---
+
+### 2️⃣ **Quantitative (Numerical) Variables**
+
+* Represent **numbers** that show quantity/measurement.
+* Arithmetic operations (+, −, ×, ÷) make sense here.
+* Examples: Height, weight, GPA, income.
+
+🔹 Subtypes:
+
+* **Discrete** → Takes **countable values**, usually integers.
+
+  * Example: Number of students in a class (20, 21, not 20.5).
+  * Number of cars in a parking lot.
+* **Continuous** → Takes **any value in a range**, including decimals.
+
+  * Example: Height = 172.5 cm, Weight = 65.8 kg, Time = 4.73 seconds.
+
+---
+
+## ⚖️ **Summary Table**
+
+| Variable Type    | Subtype    | Examples                                  |
+| ---------------- | ---------- | ----------------------------------------- |
+| **Qualitative**  | Nominal    | Gender, Blood Group, City                 |
+|                  | Ordinal    | Education level, T-shirt size, Rankings   |
+| **Quantitative** | Discrete   | No. of siblings, No. of students in class |
+|                  | Continuous | Height, Weight, Time, GPA                 |
+
+---
+
+## 🎯 Real-Life Example: Student Survey
+
+Suppose we survey UCP students:
+
+* Name → **Qualitative, Nominal**
+* Major (CS, BBA, EE) → **Qualitative, Nominal**
+* Year (Freshman, Sophomore, Junior, Senior) → **Qualitative, Ordinal**
+* GPA (3.2, 3.7, …) → **Quantitative, Continuous**
+* Number of courses taken this semester → **Quantitative, Discrete**
+
+---
+
+✅ So, in Statistics:
+
+* We first **identify variables** in data.
+* Then decide **what type of variable** they are.
+* That determines which **statistical methods** to apply later.
+
+---
+

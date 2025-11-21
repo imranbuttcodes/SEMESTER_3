@@ -1,0 +1,130 @@
+Perfect bro ✅ Let’s make a **Comprehensive Quiz (University Style)** based on everything we’ve learned so far:
+
+* **Probability vs Statistics (definitions & importance)**
+* **Population, Sample, Parameter, Statistic**
+* **Types of Statistics (Descriptive vs Inferential)**
+* **Variables & Data Types (Qualitative, Quantitative, Discrete, Continuous)**
+* **Scales of Measurement (Nominal, Ordinal, Interval, Ratio)**
+* **Frequency, Frequency Distribution, Relative Frequency, Cumulative Frequency, Class Width (h = R/k)**
+
+---
+
+# 📘 Comprehensive Quiz
+
+## **Section A: Multiple Choice Questions (MCQs)**
+
+**Q1.** Probability is mainly concerned with:
+a) Collecting data
+b) Analyzing past data only
+c) Measuring uncertainty of events
+d) Summarizing sample characteristics
+
+---
+
+**Q2.** Which of the following best defines a **population**?
+a) A subset of individuals chosen from the group
+b) A numerical result from sample data
+c) The entire group of individuals or items of interest
+d) A numerical result from population data
+
+---
+
+**Q3.** A numerical value describing a sample is called:
+a) Parameter
+b) Statistic
+c) Variable
+d) Constant
+
+---
+
+**Q4.** Which type of statistics is used for **prediction and decision-making**?
+a) Descriptive
+b) Inferential
+c) Nominal
+d) Ratio
+
+---
+
+**Q5.** The **height of students** in a class is an example of:
+a) Qualitative Nominal variable
+b) Quantitative Discrete variable
+c) Quantitative Continuous variable
+d) Ordinal variable
+
+---
+
+**Q6.** “Blood type (A, B, AB, O)” is an example of which measurement scale?
+a) Ordinal
+b) Interval
+c) Nominal
+d) Ratio
+
+---
+
+**Q7.** Which scale of measurement allows us to say “twice as much”?
+a) Nominal
+b) Ordinal
+c) Interval
+d) Ratio
+
+---
+
+**Q8.** If a dataset has values: {5, 6, 7, 7, 8, 9}, what is the frequency of 7?
+a) 1
+b) 2
+c) 3
+d) 4
+
+---
+
+**Q9.** Which of the following is **always rounded UP** to the next whole number when constructing a frequency distribution?
+a) Range (R)
+b) Class Width (h)
+c) Number of classes (k)
+d) Frequency
+
+---
+
+**Q10.** The formula for class width is:
+a) ( h = R \times k )
+b) ( h = \frac{R}{k} )
+c) ( h = \frac{n}{R} )
+d) ( h = R - k )
+
+---
+
+---
+
+## **Section B: True/False**
+
+**Q11.** A sample is always larger than a population.
+**Q12.** Ordinal data provides ranking but not meaningful differences.
+**Q13.** Interval scale has equal differences but no true zero.
+**Q14.** Cumulative frequency is the proportion of data values.
+**Q15.** Relative frequency = Frequency ÷ Total observations.
+
+---
+
+## **Section C: Short Answer**
+
+**Q16.** Define parameter and statistic with examples.
+
+**Q17.** Differentiate between descriptive and inferential statistics.
+
+**Q18.** Give one example each of:
+
+* Nominal data
+* Ordinal data
+* Interval data
+* Ratio data
+
+**Q19.** Construct a simple frequency table for the dataset:
+`2, 2, 3, 4, 4, 4, 5, 5, 6`
+
+**Q20.** A dataset has maximum = 92, minimum = 12, and number of classes = 8.
+
+* Find the **range (R)**.
+* Find the **class width (h)**.
+
+---
+

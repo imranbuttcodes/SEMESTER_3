@@ -1,0 +1,58 @@
+Think of the 2D array as a **hotel with several floors**.
+
+* `num_columns` = How many **rooms are on each floor**.
+* `row_index` = Which **floor** you want to go to.
+* `column_index` = Which **room** you want on that floor.
+* `element_size` = How many **people** can fit in one room (e.g., 2 bytes/people).
+
+Your goal is to find the address of a specific room, say `[row 1, col 2]`.
+
+The formula is just a two-step process:
+1.  **Find out how many *rooms* to skip.**
+2.  **Find out how many *bytes* that is.**
+
+---
+
+### Step 1: How many rooms do you skip?
+
+To get to the room at `[row 1, col 2]`, you must:
+
+1.  **Skip all the full floors *before* your floor.**
+    * You want **floor 1**, so you must skip all of **floor 0**.
+    * How many rooms are on floor 0? The `num_columns`.
+    * Rooms to skip = `row_index * num_columns`
+    * `1 * 3 = 3 rooms` (You skip rooms `[0,0]`, `[0,1]`, and `[0,2]`)
+
+2.  **Walk down your floor to the correct room.**
+    * You are now at the start of floor 1 (at room `[1,0]`).
+    * You want **room 2**, so you must skip rooms 0 and 1.
+    * Rooms to skip = `column_index`
+    * `2 rooms` (You skip rooms `[1,0]` and `[1,1]`)
+
+**Total rooms to skip** = (rooms on floors above) + (rooms on your floor)
+**Total rooms to skip** = `(row_index * num_columns) + column_index`
+` (1 * 3) + 2 = 5 rooms`
+
+
+
+---
+
+### Step 2: How many bytes is that?
+
+This is the easy part. You know you need to skip **5 rooms**, and you know each room holds **2 bytes** (`element_size`).
+
+* **Total bytes to skip** = (Total rooms to skip) * `element_size`
+* **Total bytes to skip** = `( (row_index * num_columns) + column_index ) * element_size`
+* `5 * 2 = 10 bytes`
+
+---
+
+### The Final Address
+
+The final address is just:
+**`linear_address = base_address + (total bytes to skip)`**
+
+That's all the formula is. It just calculates:
+1.  How many full rows to skip (`row_index * num_columns`).
+2.  Adds how many items to skip in the current row (`+ column_index`).
+3.  Multiplies that total element count by the size of each element (`* element_size`).

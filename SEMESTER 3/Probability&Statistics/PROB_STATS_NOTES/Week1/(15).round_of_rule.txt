@@ -1,0 +1,71 @@
+Perfect bro ✅ let’s go deeper into **why we round class width (h)** and how it affects frequency distribution.
+
+---
+
+# 🔹 Why Round Class Width?
+
+When we calculate
+[
+h = \frac{R}{k}
+]
+the result is often **not a whole number** (like 8.2).
+
+But in frequency tables, **class intervals must be clean, simple, and non-overlapping**, so we **round h** to a convenient whole number.
+
+---
+
+
+## 🔹 Rules of Rounding Class Width
+
+1. **Always round UP** (not down).
+
+   * If ( h = 8.2 ), we use 9.
+   * Why? Because rounding down to 8 would make the total range smaller than the data spread → last value might not fit into any class.
+
+2. **Choose a convenient number**.
+
+   * Example: if ( h = 4.6 ), you could pick 5.
+   * If ( h = 12.3 ), pick 13 (or even 15 for neatness).
+
+3. **Consistency is key**.
+
+   * All intervals should have the **same width**.
+
+---
+
+## 🔹 Example: Effect of Rounding
+
+Dataset: Marks 7–48 (R = 41), k = 5 →
+[
+h = \frac{41}{5} = 8.2
+]
+
+* If you round **down to 8**:
+
+  * Intervals = 7–14, 15–22, 23–30, 31–38, 39–46.
+  * Problem: value 48 doesn’t fit in any class! ❌
+
+* If you round **up to 9**:
+
+  * Intervals = 7–15, 16–24, 25–33, 34–42, 43–51.
+  * ✔ All values (including 48) fit properly.
+
+---
+
+## 🔹 Intuition
+
+Think of class intervals like **shelves in a cupboard**:
+
+* If the shelf height is too small (rounding down), the tallest book (max value) won’t fit.
+* If you make shelves a bit taller (rounding up), everything fits nicely.
+
+---
+
+✅ So the rule is:
+
+* **Compute h = R/k**
+* **Round UP** to the next whole number (or nearest convenient one)
+* Build clean intervals that fully cover the dataset.
+
+---
+

@@ -1,0 +1,87 @@
+Excellent — you’re thinking **exactly like a CPU designer now** 👏
+
+Let’s clear this confusion once and for all — because it’s one of the most misunderstood parts of **overflow**.
+
+---
+
+### ⚙ The core idea:
+
+**Overflow flag (OF)** in signed arithmetic is **not** about whether the result is positive or negative.
+It’s about whether the **sign of the result makes sense given the signs of the operands.**
+
+---
+
+### 🧮 Rule for addition (signed overflow):
+
+> **OF = 1** if both operands have the **same sign**, but the **result’s sign bit (MSB)** is **different**.
+
+---
+
+### ✅ Let’s apply that rule to your case:
+
+| Item      | Binary    | Sign Bit | Signed Value |
+| --------- | --------- | -------- | ------------ |
+| Operand 1 | 1000 0000 | 1        | -128         |
+| Operand 2 | 1000 0000 | 1        | -128         |
+| Result    | 0000 0000 | 0        | 0            |
+
+---
+
+### 🧠 Interpretation:
+
+* Both operands’ sign bits = **1** → both are **negative**.
+* Result’s sign bit = **0** → result is **positive**.
+* Negative + Negative = Positive ❌ (impossible in signed math).
+
+Therefore, **OF = 1** → signed overflow occurred.
+
+---
+
+### ⚖ If we had both operands **positive**, e.g.:
+
+```
+0111 1111 (+127)
++0111 1111 (+127)
+-----------------
+1111 1110 (-2) → result is negative
+```
+
+That’s also an overflow, because two positives gave a negative result.
+So overflow happens in **either** of these two situations:
+
+| Operand 1 | Operand 2 | Result | OF |
+| --------- | --------- | ------ | -- |
+| +         | +         | −      | 1  |
+| −         | −         | +      | 1  |
+| +         | −         | any    | 0  |
+| −         | +         | any    | 0  |
+
+---
+
+### 🧩 In your instruction:
+
+```
+0x80 (-128) + 0x80 (-128) = 0x00 (0)
+```
+
+→ both negative, result positive
+✅ **Overflow = 1**
+
+and since result bit7 = 0 →
+✅ **Sign flag = 0**
+
+---
+
+**Final Summary:**
+
+| Flag | Value | Explanation                                               |
+| ---- | ----- | --------------------------------------------------------- |
+| OF   | 1     | Two negatives produced a positive (impossible → overflow) |
+| SF   | 0     | Result sign bit (bit 7) = 0 → positive                    |
+| ZF   | 1     | Result = 0                                                |
+| CF   | 1     | Unsigned carry out                                        |
+| AF   | 0     | No half-carry                                             |
+| PF   | 1     | Even parity                                               |
+
+---
+

@@ -1,0 +1,70 @@
+Perfect 👌 we’ll do it like a proper **Lecture 1**:
+
+1. **Story/Intuition** (coin toss, dice, cards) → to feel randomness.
+2. **Formal Definitions** → Probability & Statistics.
+
+---
+
+# 🎓 Lecture 1: Introduction
+
+### 🎲 **Intuitive Story of Randomness**
+
+* You flip a **coin** → outcome could be *Heads* or *Tails*.
+* You roll a **die** → outcome could be any number from 1 to 6.
+* You draw a **card** → outcome could be one of 52 cards.
+
+👉 Notice something? You **don’t know** the outcome in advance, but you **know all possible outcomes**.
+That’s the heart of *probability*.
+
+---
+
+### 📖 **Formal Definitions**
+
+#### **Probability**
+
+> Probability is the branch of mathematics that deals with **measuring uncertainty**.
+> Formally: If an experiment has a sample space ( S ) (all possible outcomes), and an event ( E \subseteq S ), then the probability of event ( E ) is:
+
+[
+P(E) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}}, \quad 0 \leq P(E) \leq 1
+]
+
+* Example:
+  Coin toss → ( S = {H, T} ), event ( E = {H} ).
+  [
+  P(E) = \frac{1}{2}
+  ]
+
+---
+
+#### **Statistics**
+
+> Statistics is the branch of mathematics that deals with **collecting, organizing, analyzing, and interpreting data**.
+
+* Two parts of Statistics:
+
+  1. **Descriptive Statistics** → Summarizing data (mean, median, variance, charts).
+  2. **Inferential Statistics** → Making predictions or decisions based on sample data (hypothesis testing, confidence intervals).
+
+* Example:
+  Suppose we ask 100 students their height.
+
+  * Descriptive: “Average height is 170 cm.”
+  * Inferential: “We are 95% confident that the average height of all university students is between 168 and 172 cm.”
+
+---
+
+### 🧠 **Big Picture Difference**
+
+* **Probability** → starts with a model → predicts outcomes.
+  (e.g., coin toss: (P(H) = 0.5)).
+* **Statistics** → starts with data → infers the model.
+  (e.g., after tossing 100 times, you got 48 heads → estimate (P(H) \approx 0.48)).
+
+---
+
+✅ So, Probability is *theory of randomness*.
+✅ Statistics is *learning from data*.
+
+---
+

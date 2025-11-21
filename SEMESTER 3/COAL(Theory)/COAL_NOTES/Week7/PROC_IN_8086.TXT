@@ -1,0 +1,56 @@
+# Procedures (PROCs) in 8086 Assembly
+
+A **procedure** (sometimes called a subroutine or function) in 8086 assembly lets you group instructions together under a name, so you can "call" that code from elsewhere in your program. This makes code easier to organize and reuse.
+
+### Basic PROC Structure
+
+```asm
+myproc PROC        ; Start of procedure
+  ; procedure body (your instructions)
+  RET             ; Return to caller
+myproc ENDP        ; End of procedure
+```
+- `PROC` declares the start of a procedure.
+- Instructions go in the body.
+- Always end with `RET`. This tells the CPU to pop the return address from the stack and go back.
+- `ENDP` marks the end of your procedure.
+
+### Calling a Procedure
+Use the `CALL` instruction with the procedure's name:
+```asm
+CALL myproc    ; jumps to myproc, pushes return address
+```
+
+- **What happens during CALL?**
+  - The CPU pushes the address of the instruction after `CALL` onto the stack.
+  - It jumps to your procedure.
+- **What happens during RET?**
+  - The CPU pops that address from the stack and resumes code just after `CALL`.
+
+### Example: Adding Two Numbers in a Procedure
+
+```asm
+ORG 100h          
+MOV AX, 5     
+MOV BX, 3     
+CALL addproc  ; Call the procedure to add
+RET           ; End program
+
+addproc PROC
+  ADD AX, BX  ; Adds BX to AX
+  RET         ; Return to main program
+addproc ENDP
+```
+When `CALL addproc` runs, execution "jumps" into `addproc`. When `RET` is reached, the CPU returns to the instruction after `CALL`.
+
+### Key Points about STACK and PROCEDURES
+- Every `CALL` pushes a return address onto the stack.
+- Every `RET` pops an address off and "returns" to that point.
+- If you use `PUSH`/`POP` inside a procedure, you should make sure registers are restored before you return (to avoid breaking your main code).
+
+***
+
+
+7. 50
+E)
+F)5

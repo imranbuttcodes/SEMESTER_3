@@ -1,0 +1,20 @@
+A DOS interrupt is a software-generated signal that breaks the flow of a program's execution to request and execute services from the Disk Operating System (DOS). In the x86 architecture, this is accomplished using the INT instruction. 
+This mechanism was a critical feature in early personal computers, serving as the main interface between user applications and the operating system for tasks such as: 
+Reading and writing to files on a disk.
+Displaying output on the screen.
+Reading input from the keyboard.
+Terminating a program and returning control to DOS. 
+How a DOS interrupt works
+Software call: A program issues a software interrupt by executing an INT xx instruction, where xx is the hexadecimal number of the desired interrupt. A programmer would place the specific function number (known as a sub-function) into a processor register, most commonly AH.
+Context switch: The processor immediately suspends the current program's execution and saves its current state, including the instruction pointer and registers, onto the stack.
+Interrupt Vector Table (IVT): The processor uses the interrupt number to find the address of the corresponding Interrupt Service Routine (ISR) in the Interrupt Vector Table. This table is a list of memory addresses located in the first 1024 bytes of memory.
+Service routine execution: Control is transferred to the ISR, which is a specialized piece of code in the operating system or BIOS. This routine performs the requested service, using the information passed in the registers.
+Return to program: Once the ISR finishes, it executes an IRET (interrupt return) instruction. This restores the saved state from the stack and returns control to the original program, which continues executing from where it left off. 
+The most common DOS interrupt: INT 21h
+The most frequently used DOS interrupt is INT 21h, known as the DOS function call. This single interrupt provides a wide range of services, with the specific function determined by the value placed in the AH register before the interrupt is called. 
+Some common INT 21h functions include: 
+AH value 	Function	Description
+02h	Output character	Displays the character in the DL register on the screen.
+09h	Output string	Displays a string of characters whose memory address is in the DX register.
+01h	Read character	Reads a character from the keyboard and returns it in the AL register.
+4Ch	Terminate program	Exits the program and returns control to the operating system.

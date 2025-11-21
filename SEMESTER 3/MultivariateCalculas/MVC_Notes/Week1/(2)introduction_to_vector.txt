@@ -1,0 +1,112 @@
+Great move bro 👍 After understanding *why* we need multivariable calculus, the natural next step in any university course is to introduce **vectors**, because they are the language of 2D and 3D calculus.
+
+Let’s start:
+
+---
+
+# 📘 **Lecture 2: Introduction to Vectors**
+
+### 1. **What is a Vector?**
+
+* A **scalar** is a quantity with only **magnitude** (size).
+  Example: mass = 5 kg, temperature = 25°C.
+* A **vector** is a quantity with both **magnitude and direction**.
+  Example: velocity = 60 km/h **east**, force = 10 N **downward**.
+
+👉 Think of a vector as an **arrow**:
+
+* Length of the arrow → magnitude.
+* Direction of the arrow → orientation in space.
+
+---
+
+### 2. **Representation of Vectors**
+
+In **2D** (the plane):
+[
+\vec{v} = \langle v_x, v_y \rangle
+]
+Example: ( \vec{v} = \langle 3, 4 \rangle ).
+
+In **3D** (space):
+[
+\vec{v} = \langle v_x, v_y, v_z \rangle
+]
+Example: ( \vec{v} = \langle 2, -1, 5 \rangle ).
+
+---
+
+### 3. **Magnitude of a Vector**
+
+By Pythagoras theorem:
+[
+|\vec{v}| = \sqrt{v_x^2 + v_y^2} \quad (2D)
+]
+[
+|\vec{v}| = \sqrt{v_x^2 + v_y^2 + v_z^2} \quad (3D)
+]
+
+👉 Example: For ( \vec{v} = \langle 3, 4 \rangle ),
+[
+|\vec{v}| = \sqrt{3^2 + 4^2} = 5
+]
+
+---
+
+### 4. **Position Vectors**
+
+If a point ( P(x,y) ) is in the plane, then the vector from the origin ( O(0,0) ) to ( P(x,y) ) is:
+[
+\vec{OP} = \langle x, y \rangle
+]
+
+Similarly, in 3D:
+[
+\vec{OP} = \langle x, y, z \rangle
+]
+
+So every point in space can be represented by a vector from the origin.
+
+---
+
+### 5. **Vector Operations**
+
+* **Addition**:
+  [
+  \langle a_1, a_2 \rangle + \langle b_1, b_2 \rangle = \langle a_1+b_1, a_2+b_2 \rangle
+  ]
+* **Scalar multiplication**:
+  [
+  c \cdot \langle a_1, a_2 \rangle = \langle ca_1, ca_2 \rangle
+  ]
+* **Geometric meaning**: vectors can be added tip-to-tail (triangle law).
+
+---
+
+### 6. **Why Vectors in Multivariable Calculus?**
+
+* Functions of many variables produce **surfaces** in 3D.
+* To analyze slopes, directions, and movements, we need vectors.
+* Later, we’ll use vectors for:
+
+  * **Gradients** (steepest slope).
+  * **Velocity & acceleration in 3D motion**.
+  * **Line integrals & surface integrals** in physics.
+
+---
+
+⚡ Quick Check Example:
+
+* Let ( \vec{a} = \langle 1, 2, 3 \rangle ), ( \vec{b} = \langle -1, 4, 2 \rangle ).
+  Find ( \vec{a} + \vec{b} ) and ( |\vec{a}| ).
+
+Solution:
+[
+\vec{a} + \vec{b} = \langle 1+(-1), 2+4, 3+2 \rangle = \langle 0, 6, 5 \rangle
+]
+[
+|\vec{a}| = \sqrt{1^2 + 2^2 + 3^2} = \sqrt{14}
+]
+
+---
+

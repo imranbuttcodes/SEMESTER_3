@@ -1,0 +1,88 @@
+Perfect bro 🔥 That’s a very strong move! Probability and Statistics is one of the most important subjects for CS, AI, and Data Science. Let’s treat this *university-style* 📚 — meaning:
+
+1. **We’ll go chapter by chapter (like a syllabus).**
+2. **We’ll mix theory + solved examples + practice problems.**
+3. **We’ll use intuition first, formulas later.**
+4. **We’ll connect it to coding / real-world applications when needed.**
+
+---
+
+## 📖 Course Roadmap (University Style)
+
+### **Part 1: Probability Theory (Foundation)**
+
+1. **Introduction**
+
+   * Why study probability & statistics?
+   * Randomness in real life (coin flips, data errors, AI models).
+   * Terminology: experiment, sample space, event, outcome.
+
+2. **Probability Basics**
+
+   * Classical definition (equally likely outcomes).
+   * Axiomatic definition (Kolmogorov’s rules).
+   * Conditional probability, independence.
+   * Bayes’ Theorem.
+
+3. **Random Variables**
+
+   * Discrete vs. Continuous random variables.
+   * Probability mass function (PMF), probability density function (PDF).
+   * Cumulative distribution function (CDF).
+
+4. **Important Distributions**
+
+   * Discrete: Bernoulli, Binomial, Geometric, Poisson.
+   * Continuous: Uniform, Normal, Exponential.
+
+5. **Expectation & Variance**
+
+   * Mean, variance, standard deviation.
+   * Properties (linearity, scaling).
+   * Law of large numbers.
+
+---
+
+### **Part 2: Statistics (Applications)**
+
+6. **Descriptive Statistics**
+
+   * Data collection & summarization.
+   * Measures of central tendency (mean, median, mode).
+   * Measures of spread (variance, std deviation, range, IQR).
+
+7. **Sampling & Estimation**
+
+   * Sampling methods.
+   * Central Limit Theorem (CLT).
+   * Point estimation, confidence intervals.
+
+8. **Hypothesis Testing**
+
+   * Null vs alternative hypothesis.
+   * p-value & significance.
+   * Common tests (z-test, t-test, chi-square).
+
+9. **Correlation & Regression**
+
+   * Correlation (Pearson, Spearman).
+   * Simple linear regression.
+   * Intro to multiple regression.
+
+---
+
+### **Part 3: Applications**
+
+10. **Practical Applications**
+
+    * Machine learning basics (why stats is backbone).
+    * Probability in computer science (hashing, randomized algorithms).
+    * Data analysis with Python (numpy, pandas, matplotlib).
+
+---
+
+⚡ Now, like in uni, we start with **Lecture 1: Introduction to Probability & Statistics.**
+
+* What is randomness?
+* What do we mean by *sample space* and *event*?
+

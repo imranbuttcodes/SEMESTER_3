@@ -1,0 +1,404 @@
+Alright bro, let's go **SUPER DEEP** into the **Interrupt Flag (IF)** ! 🚀
+
+---
+
+## **INTERRUPT FLAG (IF) - BIT 9 OF FLAGS REGISTER**
+
+---
+
+## **1. WHAT IS THE INTERRUPT FLAG?**
+
+The **IF** is a control flag that acts like a **master switch** for maskable hardware interrupts.
+
+- **IF = 1:** Interrupts are **ENABLED** (CPU will respond to hardware interrupt requests)
+- **IF = 0:** Interrupts are **DISABLED** (CPU will ignore hardware interrupt requests)
+
+Think of it like the "Do Not Disturb" mode on your phone!
+
+---
+
+## **2. TYPES OF INTERRUPTS IN 8086**
+
+Before diving deeper, understand that 8086 has **3 types of interrupts**:
+
+### **A. Software Interrupts**
+- Triggered by `INT n` instruction in your code
+- **IF has NO effect on these!**
+- Example: `INT 21h` (DOS interrupt)
+
+### **B. Non-Maskable Interrupts (NMI)**
+- Triggered by hardware through the **NMI pin** on CPU
+- **IF has NO effect on these!**
+- Used for critical events (power failure, parity errors)
+- **Cannot be disabled** - hence "non-maskable"
+
+### **C. Maskable Hardware Interrupts (INTR)**
+- Triggered by hardware through the **INTR pin** on CPU
+- **IF CONTROLS ONLY THESE!**
+- Examples: keyboard input, timer ticks, disk operations
+- Can be enabled/disabled by programmer
+
+---
+
+## **3. HOW IF WORKS**
+
+```
+Hardware Device → INTR Pin → 8259 PIC → CPU
+
+IF = 1: CPU says "Sure, I'll handle it!"
+IF = 0: CPU says "Not now, I'm busy!" (ignores the request)
+```
+
+**The Process:**
+
+1. Hardware device needs CPU attention (keyboard pressed, timer expired, etc.)
+2. Device sends signal to **8259 PIC (Programmable Interrupt Controller)**
+3. PIC sends interrupt request to CPU's **INTR pin**
+4. CPU checks **IF flag**:
+   - **IF = 1:** CPU finishes current instruction, then:
+     - Pushes FLAGS onto stack
+     - **Automatically clears IF (sets to 0)** to prevent nested interrupts
+     - Pushes CS and IP onto stack
+     - Jumps to interrupt handler (ISR)
+   - **IF = 0:** CPU ignores the request and continues executing
+
+---
+
+## **4. INSTRUCTIONS TO CONTROL IF**
+
+### **STI - Set Interrupt Flag**
+```assembly
+STI               ; IF = 1 (Enable interrupts)
+```
+- Enables maskable hardware interrupts
+- Takes effect **after the next instruction** executes
+- This delay prevents issues when used with certain instructions
+
+### **CLI - Clear Interrupt Flag**
+```assembly
+CLI               ; IF = 0 (Disable interrupts)
+```
+- Disables maskable hardware interrupts
+- Takes effect **immediately**
+
+---
+
+## **5. PRACTICAL EXAMPLES**
+
+### **Example 1: Protecting Critical Code**
+```assembly
+CLI               ; Disable interrupts
+MOV AL, [1234h]   ; Read from memory
+ADD AL, 05h       ; Modify
+MOV [1234h], AL   ; Write back
+STI               ; Re-enable interrupts
+```
+
+**Why?** If an interrupt occurred between the read and write, the interrupt handler might also access that memory location, causing a **race condition** and data corruption!
+
+---
+
+### **Example 2: Modifying Interrupt Vector Table**
+
+The **Interrupt Vector Table (IVT)** is at memory location 0000:0000 and contains addresses of all interrupt handlers.
+
+```assembly
+CLI               ; Disable interrupts
+
+; Change INT 08h vector (timer interrupt)
+MOV AX, 0000h
+MOV ES, AX        ; ES = 0000h (IVT segment)
+MOV BX, 0020h     ; Offset for INT 08h (08h * 4 = 32 = 20h)
+
+; Install new handler address
+MOV WORD PTR ES:[BX], OFFSET MyTimerHandler    ; IP
+MOV WORD PTR ES:[BX+2], SEG MyTimerHandler     ; CS
+
+STI               ; Re-enable interrupts
+```
+
+**Why disable interrupts?** If a timer interrupt occurs while we're only halfway done updating the vector (only IP changed, not CS), the CPU would jump to an invalid address and **CRASH**!
+
+---
+
+### **Example 3: Real-world Hardware Access**
+
+```assembly
+; Reprogramming the 8259 PIC (Interrupt Controller)
+CLI               ; MUST disable interrupts first!
+
+MOV AL, 11h
+OUT 20h, AL       ; Send ICW1 to PIC
+MOV AL, 08h
+OUT 21h, AL       ; Send ICW2 to PIC
+; ... more PIC programming ...
+
+STI               ; Re-enable interrupts
+```
+
+**Why?** If an interrupt occurred during PIC reprogramming, the PIC might be in an inconsistent state, causing system instability!
+
+---
+
+## **6. WHAT HAPPENS DURING AN INTERRUPT?**
+
+When IF = 1 and a hardware interrupt occurs:
+
+**Step-by-step:**
+
+1. **CPU finishes current instruction**
+2. **CPU automatically:**
+   - Pushes FLAGS register → Stack
+   - **Clears IF (sets to 0)** ← This prevents interrupt nesting!
+   - Clears TF (trap flag)
+   - Pushes CS → Stack
+   - Pushes IP → Stack
+3. **CPU reads interrupt vector:**
+   - Gets interrupt number from PIC (e.g., INT 08h)
+   - Looks up address in IVT: `Address = Interrupt_Number × 4`
+   - Loads new CS:IP from that address
+4. **Interrupt Service Routine (ISR) executes**
+5. **ISR ends with IRET instruction**
+6. **IRET pops:**
+   - IP ← Stack
+   - CS ← Stack
+   - FLAGS ← Stack (this **restores IF to 1**)
+7. **Execution continues where it left off**
+
+---
+
+## **7. WHY IF IS AUTOMATICALLY CLEARED**
+
+When an interrupt occurs, **IF is automatically set to 0**. This prevents:
+
+### **Problem: Interrupt Nesting Without Protection**
+```
+Main Program
+    ↓
+Timer Interrupt (INT 08h)
+    ↓ (IF still = 1, another interrupt allowed!)
+Keyboard Interrupt (INT 09h)
+    ↓ (IF still = 1, another interrupt allowed!)
+Disk Interrupt (INT 0Eh)
+    ↓ (Stack overflow! System crash!)
+```
+
+### **Solution: IF Cleared Automatically**
+```
+Main Program
+    ↓
+Timer Interrupt (INT 08h) — IF cleared to 0
+    ↓ (No more interrupts allowed until ISR completes)
+ISR executes
+    ↓
+IRET — FLAGS restored, IF back to 1
+    ↓
+Keyboard Interrupt (INT 09h) — Now allowed
+```
+
+---
+
+## **8. RE-ENABLING INTERRUPTS IN ISR**
+
+Some ISRs need to **allow nested interrupts**. They can do this by explicitly using STI:
+
+```assembly
+MyISR:
+    PUSH AX
+    PUSH BX
+    ; Save other registers...
+    
+    STI               ; Re-enable interrupts INSIDE the ISR!
+                      ; Now other interrupts can occur
+    
+    ; ... ISR code ...
+    
+    ; Restore registers
+    POP BX
+    POP AX
+    IRET
+```
+
+**Use case:** Long-running ISR that shouldn't block other important interrupts (like keyboard input during a disk operation).
+
+---
+
+## **9. COMMON SCENARIOS WHERE YOU DISABLE INTERRUPTS**
+
+### **Scenario 1: Atomic Operations**
+Operations that MUST complete without interruption:
+```assembly
+CLI
+INC WORD PTR [Counter]    ; Read-modify-write must be atomic
+STI
+```
+
+### **Scenario 2: Hardware Programming**
+```assembly
+CLI
+; Program timer, PIC, DMA controller, etc.
+STI
+```
+
+### **Scenario 3: Critical Data Structures**
+```assembly
+CLI
+; Update linked list pointers
+; Modify queue head/tail
+; Update buffer indices
+STI
+```
+
+### **Scenario 4: Stack Switching**
+```assembly
+CLI
+MOV SP, NewStackPointer   ; Changing stack is dangerous!
+MOV SS, NewStackSegment   ; Interrupts could corrupt stack
+STI
+```
+
+---
+
+## **10. CHECKING IF STATUS**
+
+You can check the current IF status by reading FLAGS:
+
+```assembly
+PUSHF             ; Push FLAGS onto stack
+POP AX            ; Pop into AX
+TEST AX, 0200h    ; Test bit 9 (IF)
+JZ InterruptsOff  ; Jump if IF = 0
+; Interrupts are ON
+JMP Done
+InterruptsOff:
+; Interrupts are OFF
+Done:
+```
+
+---
+
+## **11. COMMON MISTAKES & GOTCHAS**
+
+### **Mistake 1: Forgetting to Re-enable**
+```assembly
+CLI
+; Critical section
+; Oops! Forgot STI
+; Interrupts remain disabled forever!
+; System hangs - no keyboard, no timer!
+```
+
+### **Mistake 2: Disabling for Too Long**
+```assembly
+CLI
+; Very long operation (milliseconds)
+; Timer interrupts missed → system clock skips
+; Keyboard interrupts missed → keys lost
+STI
+```
+
+**Rule:** Keep interrupt-disabled sections **AS SHORT AS POSSIBLE!**
+
+### **Mistake 3: Not Protecting ISR Installation**
+```assembly
+; BAD - No CLI/STI
+MOV WORD PTR ES:[BX], OFFSET MyHandler    ; IP changed
+; ← INTERRUPT COULD OCCUR HERE with wrong CS!
+MOV WORD PTR ES:[BX+2], SEG MyHandler     ; CS changed
+
+; GOOD - Protected
+CLI
+MOV WORD PTR ES:[BX], OFFSET MyHandler
+MOV WORD PTR ES:[BX+2], SEG MyHandler
+STI
+```
+
+---
+
+## **12. INTERRUPT PRIORITY & IF**
+
+When IF = 1, the **8259 PIC** determines interrupt priority, NOT the CPU:
+
+**Default 8086/8088 Priority (highest to lowest):**
+1. INT 08h - Timer (highest priority)
+2. INT 09h - Keyboard
+3. INT 0Bh - Serial port (COM2)
+4. INT 0Ch - Serial port (COM1)
+5. INT 0Dh - Hard disk
+6. INT 0Eh - Floppy disk
+7. INT 0Fh - Printer (lowest priority)
+
+**IF controls all of them equally** - it's an all-or-nothing switch!
+
+---
+
+## **13. REAL-WORLD EXAMPLE: DOS SYSTEM**
+
+In DOS, interrupts are used extensively:
+
+```assembly
+; DOS keeps interrupts enabled most of the time
+; IF = 1 normally
+
+INT 21h           ; DOS function call
+                  ; Inside DOS, it might do:
+                  ; CLI (for critical operations)
+                  ; ... update file tables ...
+                  ; STI (re-enable)
+
+; Keyboard driver (INT 09h ISR):
+KeyboardISR:
+    PUSH AX
+    IN AL, 60h    ; Read keyboard scancode
+    ; Process key
+    MOV AL, 20h
+    OUT 20h, AL   ; Send EOI to PIC
+    POP AX
+    IRET          ; Returns with IF restored to 1
+```
+
+---
+
+## **14. DEBUGGING WITH IF**
+
+If your program hangs with no keyboard response:
+- **Likely cause:** IF got set to 0 and never restored
+- **Solution:** Use a hardware debugger or NMI button
+
+```assembly
+; Debugging code to check IF
+PUSHF
+POP AX
+AND AX, 0200h
+; If AX = 0, interrupts are disabled!
+```
+
+---
+
+## **15. SUMMARY**
+
+| Aspect | Details |
+|--------|---------|
+| **Purpose** | Enable/disable maskable hardware interrupts |
+| **Bit Position** | Bit 9 of FLAGS register |
+| **Set by** | `STI` instruction or `IRET` (restores from stack) |
+| **Cleared by** | `CLI` instruction or automatically during interrupt |
+| **Affects** | Only INTR pin (maskable hardware interrupts) |
+| **Doesn't affect** | Software interrupts (INT), NMI |
+| **When to disable** | Critical sections, hardware programming, atomic operations |
+| **Golden rule** | Keep disabled as **SHORT** as possible! |
+
+---
+
+## **16. KEY TAKEAWAYS**
+
+✅ **IF controls maskable hardware interrupts ONLY**
+✅ **Automatically cleared when interrupt occurs** (prevents nesting)
+✅ **Restored by IRET** (when FLAGS is popped from stack)
+✅ **Use CLI/STI to protect critical code**
+✅ **Keep interrupt-disabled sections SHORT**
+✅ **Always remember to STI after CLI!**
+
+---
+
+That's everything about the Interrupt Flag, bro! Want to dive into any specific aspect like interrupt handlers, the 8259 PIC, or interrupt vector table? 💪

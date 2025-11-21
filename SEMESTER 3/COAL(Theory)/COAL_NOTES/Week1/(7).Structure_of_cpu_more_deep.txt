@@ -1,0 +1,69 @@
+Got it bro 👍
+Now that you’re comfortable with **number systems** and **signed numbers (1’s & 2’s complement)**, we can step into the **structure of a computer** — the actual “CO” part of **COAL (Computer Organization & Assembly Language)**.
+
+---
+
+# 🔹 Basic Structure of a Computer (von Neumann Architecture)
+
+Every modern computer follows the **von Neumann architecture** model, which has these main components:
+
+1. **Input Unit**
+
+   * Devices: Keyboard, Mouse, Scanner, Mic, etc.
+   * Function: Takes input from the outside world and converts it into a form the computer can understand (binary signals).
+
+2. **Output Unit**
+
+   * Devices: Monitor, Printer, Speakers, etc.
+   * Function: Converts processed binary results back into human-readable form.
+
+3. **Memory (Storage)**
+
+   * **Primary Memory (RAM, Cache, Registers)** → fast, temporary storage.
+   * **Secondary Memory (Hard disk, SSD)** → long-term storage.
+   * Memory is divided into **addressable locations**, each storing **binary data**.
+
+4. **Control Unit (CU)**
+
+   * “Brain” of the CPU that **fetches, decodes, and controls execution** of instructions.
+   * Controls the flow of data between memory, ALU, and I/O devices.
+
+5. **Arithmetic Logic Unit (ALU)**
+
+   * Performs **arithmetic operations** (add, subtract, multiply, divide).
+   * Performs **logical operations** (AND, OR, NOT, comparisons).
+
+6. **Registers (inside CPU)**
+
+   * Very small, very fast memory locations.
+   * Hold instructions, operands, or results temporarily.
+
+7. **System Bus**
+
+   * Communication pathway between CPU, memory, and I/O.
+   * Has 3 types:
+
+     * **Data Bus** → carries actual data.
+     * **Address Bus** → specifies memory location.
+     * **Control Bus** → carries control signals (read/write, clock, etc.).
+
+---
+
+## 🔹 The Instruction Cycle (how CPU executes code)
+
+The CPU executes instructions in a repeated cycle called **Fetch-Decode-Execute**:
+
+1. **Fetch** → CU takes the instruction from memory (using Program Counter).
+2. **Decode** → CU interprets the instruction (what operation to do).
+3. **Execute** → ALU performs the operation, result stored in registers/memory.
+
+This cycle repeats billions of times per second (GHz = billion cycles/second).
+
+---
+
+📌 This structure is what you’ll study in COAL before you even write a single line of Assembly code.
+Once you get it, you’ll see how **Assembly instructions directly control this process**.
+
+---
+
+    

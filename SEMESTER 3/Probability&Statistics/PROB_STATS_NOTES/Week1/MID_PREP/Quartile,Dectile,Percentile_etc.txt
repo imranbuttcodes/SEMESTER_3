@@ -1,0 +1,347 @@
+Here are **ALL formulas** for **quartiles**, **deciles**, and **percentiles** in statistics (Ungrouped Data).
+I’ll also show what happens when **n = 1** (dataset = {5}).
+
+---
+
+# ✅ **1. POSITION FORMULAS**
+
+## 🔹 **Quartiles**
+
+[
+Q_k \text{ position} = \frac{k (n+1)}{4},\qquad k = 1,2,3
+]
+
+## 🔹 **Deciles**
+
+[
+D_k \text{ position} = \frac{k (n+1)}{10},\qquad k = 1,2,\dots,9
+]
+
+## 🔹 **Percentiles**
+
+[
+P_k \text{ position} = \frac{k (n+1)}{100},\qquad k = 1,2,\dots,99
+]
+
+---
+
+# ✅ **2. For dataset = {5} → n = 1**
+
+Let’s plug into the formulas.
+
+---
+
+## 🔹 **Quartiles**
+
+### Q1:
+
+[
+\text{Position} = \frac{1(1+1)}{4} = \frac{2}{4} = 0.5
+]
+But dataset has only one value → **value = 5**
+
+### Q2:
+
+[
+\frac{2(1+1)}{4} = \frac{4}{4} = 1
+]
+Position 1 → **5**
+
+### Q3:
+
+[
+\frac{3(1+1)}{4} = \frac{6}{4} = 1.5
+]
+Closest value → **5**
+
+So:
+
+✔ **Q1 = 5**
+✔ **Q2 = 5**
+✔ **Q3 = 5**
+
+---
+
+## 🔹 **Deciles (D1 to D9)**
+
+Example:
+
+### D1:
+
+[
+\frac{1(1+1)}{10} = \frac{2}{10} = 0.2 \rightarrow 5
+]
+
+### D5:
+
+[
+\frac{5(1+1)}{10} = \frac{10}{10} = 1 \rightarrow 5
+]
+
+### D9:
+
+[
+\frac{9(1+1)}{10} = \frac{18}{10} = 1.8 \rightarrow 5
+]
+
+All positions still point to the only value:
+
+✔ **D1 = D2 = … = D9 = 5**
+
+---
+
+## 🔹 **Percentiles (P1 to P99)**
+
+Example:
+
+### P25:
+
+[
+\frac{25(1+1)}{100} = \frac{50}{100} = 0.5 \rightarrow 5
+]
+
+### P50:
+
+[
+\frac{50(1+1)}{100} = \frac{100}{100} = 1 \rightarrow 5
+]
+
+### P99:
+
+[
+\frac{99(1+1)}{100} = \frac{198}{100} = 1.98 \rightarrow 5
+]
+
+So:
+
+✔ **All percentiles = 5**
+
+---
+
+# ⭐ FINAL SUMMARY (ALL FORMULAS)
+
+### **Quartiles**
+
+[
+Q_k = \text{Value at } \frac{k(n+1)}{4}
+]
+
+### **Deciles**
+
+[
+D_k = \text{Value at } \frac{k(n+1)}{10}
+]
+
+### **Percentiles**
+
+[
+P_k = \text{Value at } \frac{k(n+1)}{100}
+]
+
+### **For dataset = {5} (n=1)**
+
+All quartiles = all deciles = all percentiles = **5**
+
+---
+
+Execution Time (ms)
+33
+10
+28
+33
+35
+35
+57
+39
+18
+11
+22
+37
+33
+18
+37
+15
+34
+38
+30
+27
+32
+31
+24
+33
+10
+27
+18
+45
+25
+15
+10
+33
+25
+46
+46
+28
+30
+49
+32
+26
+33
+26
+45
+25
+21
+34
+23
+24
+33
+32
+33
+27
+19
+31
+32
+18
+31
+36
+40
+32
+46
+28
+47
+27
+39
+38
+15
+52
+45
+49
+29
+16
+18
+45
+34
+31
+44
+19
+45
+39
+41
+31
+35
+31
+30
+46
+22
+40
+23
+29
+38
+39
+33
+49
+35
+27
+24
+15
+41
+49
+30
+43
+38
+29
+23
+28
+34
+45
+18
+22
+25
+24
+38
+17
+46
+25
+41
+15
+19
+11
+38
+21
+19
+35
+14
+25
+25
+20
+31
+28
+30
+35
+38
+20
+21
+34
+38
+34
+16
+55
+20
+26
+40
+13
+25
+27
+33
+33
+28
+27
+28
+32
+17
+23
+45
+16
+36
+13
+24
+33
+28
+42
+27
+33
+36
+19
+18
+33
+25
+49
+44
+33
+40
+14
+28
+43
+32
+38
+38
+16
+29
+18
+22
+21
+40
+32
+33
+23
+12
+30
+31
+22
+17
+38
+29
+22
+20
+22
+20
+25

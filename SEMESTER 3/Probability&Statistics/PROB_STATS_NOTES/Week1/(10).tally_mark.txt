@@ -1,0 +1,72 @@
+**Tally marks** are a simple, manual way to **count and record data** in statistics—especially when collecting or organizing raw data.
+
+---
+
+### ✅ What Is a Tally Mark?
+
+- A **tally mark** is a vertical line (**|**) used to represent **one occurrence** of an item or event.
+- For easier counting, every **fifth mark** is drawn as a **diagonal line** across the previous four:
+
+```
+||||  = 4  
+||||̷ = 5 (the fifth mark slashes through the group)
+```
+
+So, groups are typically counted in **fives**:
+- 1 → |
+- 2 → ||
+- 3 → |||
+- 4 → ||||
+- 5 → **||||̷** (or often written as ⧵ across the four)
+
+Example of tally for 13:
+```
+||||̷   ||||̷   |||
+(5)     (5)     (3)  → Total = 13
+```
+
+---
+
+### 📊 Purpose in Statistics
+
+Tally marks are used in the **data collection and organization phase**, especially for:
+
+1. **Creating frequency distributions**  
+   → Count how many times each value or category appears.
+
+2. **Constructing frequency tables**  
+   → Tally marks help avoid miscounting when dealing with large raw datasets.
+
+3. **Quick manual counting**  
+   → Useful in surveys, observations, or experiments done without digital tools.
+
+---
+
+### 📝 Example: Shoe Sizes of 20 Students
+
+| Shoe Size | Tally Marks      | Frequency |
+|-----------|------------------|-----------|
+| 6         | ||||             | 4         |
+| 7         | ||||̷ ||          | 7         |
+| 8         | ||||̷            | 5         |
+| 9         | ||||             | 4         |
+
+Here, tally marks make it easy to **visually group and count** responses.
+
+---
+
+### ✅ Key Points
+
+- Tally marks are part of **descriptive statistics** (organizing raw data).
+- They are **not used for analysis** but for **preliminary data summarization**.
+- Mostly used with **categorical** (nominal/ordinal) or **discrete numerical** data.
+
+---
+
+### 💡 Fun Fact:
+Tallying is one of the **oldest forms of counting**, dating back thousands of years—even ancient notched bones used tally-like systems!
+
+---
+
+**In short**:  
+> **Tally marks are a quick, visual counting tool in statistics to record frequencies of data values during data collection or organization.**

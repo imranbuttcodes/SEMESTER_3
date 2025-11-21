@@ -1,0 +1,10 @@
+Yes, when you run an executable file (.exe) created from your C++ code, its compiled machine code is loaded into a region of RAM known as the code segment, also called the text segment. 
+Here is a breakdown of the process:
+Compilation: Your C++ source code is compiled into machine code, the low-level instructions the CPU understands.
+Linking: The linker combines the compiled machine code with any necessary library files to create the final executable file (.exe). This file, which is stored on your disk, contains several sections, including the .text or code segment.
+Loading: When you run the program by double-clicking the .exe file, the operating system (OS) acts as the loader. It prepares the program for execution by performing the following steps:
+It allocates a virtual address space for the new process, which includes mapping different memory segments to the program.
+It copies the program's segments from the .exe file on the hard disk into the computer's RAM. The compiled machine code from the .text section of the file goes into the RAM's code segment.
+Execution: Once the code is in RAM, the OS transfers control to the CPU, which begins executing the machine code instructions in the code segment.
+Read-Only: The code segment is typically marked as read-only to prevent the program from accidentally overwriting or corrupting its own instructions during execution.
+Shared: The OS can also allow multiple instances of the same program to share a single copy of the code segment in memory, saving RAM

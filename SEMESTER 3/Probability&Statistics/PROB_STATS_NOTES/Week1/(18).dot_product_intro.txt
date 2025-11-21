@@ -1,0 +1,67 @@
+Perfect timing bro 🙌 Let’s dive into the **dot product** (also called **scalar product**) in multivariable calculus style.
+
+---
+
+## 🔹 Definition of Dot Product
+
+For two vectors in (\mathbb{R}^n):
+[
+\vec{u} = \langle u_1, u_2, \dots, u_n \rangle, \quad
+\vec{v} = \langle v_1, v_2, \dots, v_n \rangle
+]
+
+The **dot product** is defined as:
+[
+\vec{u} \cdot \vec{v} = u_1v_1 + u_2v_2 + \cdots + u_nv_n
+]
+
+---
+
+## 🔹 Alternative (Geometric) Definition
+
+The dot product also relates to the angle (\theta) between the two vectors:
+[
+\vec{u} \cdot \vec{v} = |\vec{u}| , |\vec{v}| \cos\theta
+]
+
+where
+
+* (|\vec{u}|) = magnitude of (\vec{u})
+* (|\vec{v}|) = magnitude of (\vec{v})
+* (\theta) = angle between (\vec{u}) and (\vec{v})
+
+---
+
+## 🔹 Why do we need it?
+
+1. To find the **angle between two vectors**.
+2. To check if two vectors are **orthogonal (perpendicular)**:
+   [
+   \vec{u} \cdot \vec{v} = 0 \quad \Longleftrightarrow \quad \vec{u} \perp \vec{v}
+   ]
+3. To project one vector onto another.
+4. Very useful in **physics** (work = force · displacement).
+
+---
+
+## 🔹 Example
+
+Let’s take our vectors from before:
+[
+\vec{u} = \langle 3, -2 \rangle, \quad \vec{v} = \langle -2, 5 \rangle
+]
+
+[
+\vec{u} \cdot \vec{v} = (3)(-2) + (-2)(5)
+]
+[
+\vec{u} \cdot \vec{v} = -6 - 10 = -16
+]
+
+✅ **So:**
+[
+\vec{u} \cdot \vec{v} = -16
+]
+
+---
+

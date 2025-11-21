@@ -1,0 +1,52 @@
+Perfect 🚀 Let’s make a **focused practice quiz only on Scales of Measurement** (Nominal, Ordinal, Interval, Ratio).
+I’ll mix MCQs, True/False, and short answers so you really lock it in.
+
+---
+
+## 🔹 Practice Quiz: Scales of Measurement
+
+**Q1.** Which scale of measurement is used for labeling categories without any quantitative meaning?
+a) Nominal
+b) Ordinal
+c) Interval
+d) Ratio
+
+---
+
+**Q2.** The ranking of students as 1st, 2nd, 3rd in a race is an example of:
+a) Nominal
+b) Ordinal
+c) Interval
+d) Ratio
+
+---
+
+**Q3.** Temperature measured in Celsius is:
+a) Nominal
+b) Ordinal
+c) Interval
+d) Ratio
+
+---
+
+**Q4.** Which scale of measurement has a **true zero point**?
+a) Nominal
+b) Ordinal
+c) Interval
+d) Ratio
+
+---
+
+**Q5.** “Blood type” (A, B, AB, O) belongs to which scale?
+
+---
+
+**Q6.** True or False: The **difference between 30°C and 40°C is the same as between 80°C and 90°C** (Celsius scale).
+
+---
+
+**Q7.** True or False: The ratio scale allows us to say “twice as much” (e.g., a weight of 10kg is twice as heavy as 5kg).
+
+---
+
+**Q8.** Give one real-world example of each scale (Nominal, Ordinal, Interval, Ratio).

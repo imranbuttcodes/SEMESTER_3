@@ -1,0 +1,120 @@
+## 🧩 1. Meaning of `ADC` and `SBB`
+
+| Instruction | Full Form                | Meaning                                              |
+| ----------- | ------------------------ | ---------------------------------------------------- |
+| `ADC`       | **Add with Carry**       | Adds two operands **plus the carry flag (CF)**       |
+| `SBB`       | **Subtract with Borrow** | Subtracts two operands **minus the carry flag (CF)** |
+
+---
+
+## ⚙️ 2. General Syntax
+
+```asm
+ADC destination, source
+SBB destination, source
+```
+
+✅ Both work for registers and memory operands
+✅ CF (Carry Flag) is **included** in the operation.
+
+---
+
+## 🧠 3. How `ADC` Works
+
+```asm
+; Suppose:
+; CF = 1
+; AL = 5
+; BL = 3
+
+ADC AL, BL    ; AL = AL + BL + CF
+```
+
+Calculation:
+`AL = 5 + 3 + 1 = 9`
+
+Carry flag (CF) is added like an extra bit.
+
+So if CF was **0**, it would just be a normal `ADD`.
+If CF was **1**, it means a previous addition overflowed, so we include it.
+
+---
+
+### 🧮 Example: Adding two 32-bit numbers (in 16-bit registers)
+
+```asm
+; AX = lower word of first number
+; BX = upper word of first number
+; CX = lower word of second number
+; DX = upper word of second number
+
+ADD AX, CX   ; add lower words
+ADC BX, DX   ; add upper words + carry from lower addition
+```
+
+If `ADD AX, CX` caused a carry, then `ADC BX, DX` will add it automatically.
+This is how we simulate **multi-byte addition**.
+
+---
+
+## 🧠 4. How `SBB` Works
+
+Similar to subtraction but includes **borrow** (carry flag).
+
+```asm
+; Suppose:
+; CF = 1  (means previous subtraction had borrow)
+; AL = 10
+; BL = 3
+
+SBB AL, BL   ; AL = AL - BL - CF
+```
+
+Calculation:
+`AL = 10 - 3 - 1 = 6`
+
+If CF = 0 → normal subtraction
+If CF = 1 → subtracts 1 more (borrowed bit)
+
+---
+
+### 🧮 Example: Subtracting two 32-bit numbers
+
+```asm
+; AX = lower word of first number
+; BX = upper word of first number
+; CX = lower word of second number
+; DX = upper word of second number
+
+SUB AX, CX   ; subtract lower words
+SBB BX, DX   ; subtract upper words with borrow
+```
+
+This handles the carry (borrow) automatically between word boundaries.
+
+---
+
+## ⚡ 5. Flags Affected
+
+Both `ADC` and `SBB` affect the same flags as `ADD` and `SUB`:
+
+* CF → Carry/Borrow
+* OF → Overflow
+* SF → Sign
+* ZF → Zero
+* AF → Auxiliary Carry
+* PF → Parity
+
+---
+
+## 🧩 6. Quick Summary Table
+
+| Instruction | Operation      | Use Case               |
+| ----------- | -------------- | ---------------------- |
+| `ADD`       | D ← D + S      | Normal addition        |
+| `ADC`       | D ← D + S + CF | Multi-byte addition    |
+| `SUB`       | D ← D - S      | Normal subtraction     |
+| `SBB`       | D ← D - S - CF | Multi-byte subtraction |
+
+---
+
