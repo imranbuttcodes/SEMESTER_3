@@ -1,0 +1,331 @@
+Alright bro, let's dive **DEEP** into all the 8086 flags! 🚀
+
+## **8086 FLAGS REGISTER - COMPLETE BREAKDOWN**
+
+The 8086 has a 16-bit FLAGS register with 9 active flags (6 status flags + 3 control flags):
+
+```
+Bit:  15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+     |  |  |  |  |OF|DF|IF|TF|SF|ZF| 0|AF| 0|PF| 1|CF|
+```
+
+---
+
+## **STATUS FLAGS** (Updated automatically by CPU)
+
+### **1. CF - Carry Flag (Bit 0)**
+
+**Purpose:** Indicates a carry out or borrow in arithmetic operations
+
+**When CF = 1:**
+- **Unsigned addition:** Result is too large (overflow beyond the register size)
+- **Unsigned subtraction:** A borrow was needed (result is negative)
+- **Shift/Rotate:** The bit shifted/rotated out is 1
+
+**Examples:**
+```assembly
+MOV AL, 0FFh      ; AL = 255
+ADD AL, 02h       ; AL = 01h, CF = 1 (carried out the 1)
+
+MOV AL, 05h
+SUB AL, 08h       ; AL = FDh (-3 in two's complement), CF = 1 (borrow needed)
+
+MOV AL, 10000001b
+SHR AL, 1         ; AL = 01000000b, CF = 1 (bit shifted out was 1)
+```
+
+**Use Cases:**
+- Multi-precision arithmetic (adding/subtracting numbers larger than register size)
+- Checking unsigned overflow
+- Conditional jumps: `JC` (jump if carry), `JNC` (jump if no carry)
+
+---
+
+### **2. PF - Parity Flag (Bit 2)**
+
+**Purpose:** Indicates even/odd parity of the **lowest 8 bits** of result
+
+**When PF = 1:** Even number of 1-bits (including zero 1-bits)
+**When PF = 0:** Odd number of 1-bits
+
+**Examples:**
+```assembly
+MOV AL, 00000011b  ; 2 ones (even) → PF = 1
+MOV AL, 00000111b  ; 3 ones (odd)  → PF = 0
+MOV AL, 11111111b  ; 8 ones (even) → PF = 1
+MOV AL, 00000000b  ; 0 ones (even) → PF = 1
+```
+
+**Important:** Only checks the **low byte** even in 16-bit operations!
+```assembly
+MOV AX, 0103h     ; AH = 01h, AL = 03h
+                  ; PF only checks AL (03h = 00000011b = 2 ones)
+                  ; PF = 1
+```
+
+**Use Cases:**
+- Error detection in data transmission
+- Rarely used in modern programming
+- Conditional jumps: `JP`/`JPE` (jump if even parity), `JNP`/`JPO` (jump if odd parity)
+
+---
+
+### **3. AF - Auxiliary Carry Flag (Bit 4)**
+
+**Purpose:** Indicates carry/borrow from bit 3 to bit 4 (lower nibble to upper nibble)
+
+**When AF = 1:** A carry or borrow occurred between the lower 4 bits and upper 4 bits
+
+**Examples:**
+```assembly
+MOV AL, 0Fh       ; AL = 00001111b
+ADD AL, 01h       ; AL = 00010000b
+                  ; Carry from bit 3 to bit 4 → AF = 1
+
+MOV AL, 1Eh       ; AL = 00011110b
+ADD AL, 03h       ; AL = 00100001b
+                  ; Carry from bit 3 to bit 4 → AF = 1
+
+MOV AL, 10h       ; AL = 00010000b
+SUB AL, 01h       ; AL = 00001111b
+                  ; Borrow from bit 4 to bit 3 → AF = 1
+```
+
+**Use Cases:**
+- **BCD (Binary Coded Decimal) arithmetic** - this is its PRIMARY use!
+- Used by instructions like `AAA` (ASCII Adjust After Addition), `DAA` (Decimal Adjust After Addition)
+- Not commonly used in regular binary arithmetic
+
+---
+
+### **4. ZF - Zero Flag (Bit 6)**
+
+**Purpose:** Indicates if the result of an operation is zero
+
+**When ZF = 1:** Result is zero
+**When ZF = 0:** Result is non-zero
+
+**Examples:**
+```assembly
+MOV AL, 05h
+SUB AL, 05h       ; AL = 0, ZF = 1
+
+MOV AL, 10h
+SUB AL, 05h       ; AL = 0Bh, ZF = 0
+
+CMP AL, BL        ; Performs AL - BL without storing
+                  ; If AL == BL, ZF = 1
+```
+
+**Use Cases:**
+- **Most commonly used flag!**
+- Testing equality (`CMP` followed by `JE`/`JZ`)
+- Checking if result is zero
+- Loop termination
+- Conditional jumps: `JE`/`JZ` (jump if equal/zero), `JNE`/`JNZ` (jump if not equal/not zero)
+
+---
+
+### **5. SF - Sign Flag (Bit 7)**
+
+**Purpose:** Indicates the sign of the result (copy of the **most significant bit**)
+
+**When SF = 1:** Result is negative (MSB = 1 in two's complement)
+**When SF = 0:** Result is positive (MSB = 0 in two's complement)
+
+**Examples:**
+```assembly
+MOV AL, 7Fh       ; AL = 01111111b (127 positive)
+ADD AL, 01h       ; AL = 10000000b (128 or -128 in signed)
+                  ; SF = 1 (MSB is 1)
+
+MOV AL, 0FEh      ; AL = 11111110b (-2 in signed)
+                  ; SF = 1
+
+MOV AL, 05h       ; AL = 00000101b (+5)
+                  ; SF = 0
+```
+
+**Important:** For 16-bit operations, SF reflects bit 15; for 8-bit, it reflects bit 7
+
+**Use Cases:**
+- Signed arithmetic comparisons
+- Determining if a signed number is negative
+- Conditional jumps: `JS` (jump if sign/negative), `JNS` (jump if not sign/positive)
+
+---
+
+### **6. OF - Overflow Flag (Bit 11)**
+
+**Purpose:** Indicates **signed arithmetic overflow** (result too large/small for signed representation)
+
+**When OF = 1:** Overflow occurred in signed arithmetic
+
+**Overflow occurs when:**
+- **Positive + Positive = Negative** (result too large)
+- **Negative + Negative = Positive** (result too small)
+
+**Examples:**
+```assembly
+MOV AL, 7Fh       ; AL = 127 (largest positive 8-bit signed)
+ADD AL, 01h       ; AL = 80h = -128 (wrapped around!)
+                  ; OF = 1 (positive + positive = negative)
+
+MOV AL, 80h       ; AL = -128 (smallest negative 8-bit signed)
+SUB AL, 01h       ; AL = 7Fh = 127 (wrapped around!)
+                  ; OF = 1 (negative - positive = positive)
+
+MOV AL, 40h       ; AL = 64
+ADD AL, 30h       ; AL = 70h = 112
+                  ; OF = 0 (no overflow, still in range)
+```
+
+**Rule of thumb:** 
+- OF is for **SIGNED** arithmetic
+- CF is for **UNSIGNED** arithmetic
+
+**Use Cases:**
+- Detecting signed overflow
+- Conditional jumps: `JO` (jump if overflow), `JNO` (jump if no overflow)
+
+---
+
+## **CONTROL FLAGS** (Set manually by programmer)
+
+### **7. DF - Direction Flag (Bit 10)**
+
+**Purpose:** Controls the direction of string operations
+
+**When DF = 0:** Auto-increment (process strings forward, low to high addresses)
+**When DF = 1:** Auto-decrement (process strings backward, high to low addresses)
+
+**Instructions to set:**
+- `CLD` - Clear Direction Flag (DF = 0, increment)
+- `STD` - Set Direction Flag (DF = 1, decrement)
+
+**Affects these instructions:**
+- `MOVS` (move string)
+- `CMPS` (compare string)
+- `SCAS` (scan string)
+- `LODS` (load string)
+- `STOS` (store string)
+
+**Examples:**
+```assembly
+CLD               ; DF = 0 (increment mode)
+MOV SI, 1000h
+MOV DI, 2000h
+MOVSB             ; Copy byte from [SI] to [DI]
+                  ; SI++, DI++ (incremented because DF=0)
+
+STD               ; DF = 1 (decrement mode)
+MOVSB             ; SI--, DI-- (decremented because DF=1)
+```
+
+**Use Cases:**
+- Processing arrays/strings forward or backward
+- Memory block operations
+
+---
+
+### **8. IF - Interrupt Flag (Bit 9)**
+
+**Purpose:** Enables or disables **maskable hardware interrupts**
+
+**When IF = 1:** Interrupts enabled (CPU responds to interrupt requests)
+**When IF = 0:** Interrupts disabled (CPU ignores interrupt requests)
+
+**Instructions to set:**
+- `STI` - Set Interrupt Flag (IF = 1, enable interrupts)
+- `CLI` - Clear Interrupt Flag (IF = 0, disable interrupts)
+
+**Examples:**
+```assembly
+CLI               ; Disable interrupts (IF = 0)
+; Critical code here that shouldn't be interrupted
+MOV AL, [1234h]
+ADD AL, 05h
+MOV [1234h], AL
+STI               ; Re-enable interrupts (IF = 1)
+```
+
+**Important:** 
+- Does NOT affect non-maskable interrupts (NMI)
+- Does NOT affect software interrupts (INT instruction)
+- Only affects hardware interrupt requests (INTR pin)
+
+**Use Cases:**
+- Protecting critical code sections
+- Preventing race conditions
+- System initialization
+
+---
+
+### **9. TF - Trap Flag (Bit 8)**
+
+**Purpose:** Enables **single-step mode** for debugging
+
+**When TF = 1:** CPU generates interrupt 1 after EVERY instruction
+**When TF = 0:** Normal execution
+
+**How it works:**
+- When TF = 1, the CPU executes one instruction then triggers INT 1
+- Debuggers use this to step through code one instruction at a time
+- The INT 1 handler can examine registers, memory, etc.
+
+**Setting TF:**
+There's no direct instruction to set TF. You must manipulate the FLAGS register:
+```assembly
+PUSHF             ; Push FLAGS onto stack
+POP AX            ; Pop into AX
+OR AX, 0100h      ; Set bit 8 (TF)
+PUSH AX           ; Push modified value
+POPF              ; Pop back into FLAGS
+                  ; Now TF = 1, single-step mode active
+```
+
+**Use Cases:**
+- **Debugging** - this is its PRIMARY use!
+- Tracing program execution
+- Used by debuggers like DEBUG.COM, Turbo Debugger
+
+---
+
+## **SUMMARY TABLE**
+
+| Flag | Bit | Type | Purpose | Set When |
+|------|-----|------|---------|----------|
+| **CF** | 0 | Status | Carry/Borrow | Unsigned overflow |
+| **PF** | 2 | Status | Parity | Even # of 1-bits in low byte |
+| **AF** | 4 | Status | Auxiliary Carry | Carry/borrow between nibbles |
+| **ZF** | 6 | Status | Zero | Result is zero |
+| **SF** | 7 | Status | Sign | MSB is 1 (negative) |
+| **TF** | 8 | Control | Trap/Single-step | Manual (debugging) |
+| **IF** | 9 | Control | Interrupt Enable | Manual (STI/CLI) |
+| **DF** | 10 | Control | Direction | Manual (CLD/STD) |
+| **OF** | 11 | Status | Overflow | Signed overflow |
+
+---
+
+## **COMMON CONDITIONAL JUMPS BASED ON FLAGS**
+
+```assembly
+JC   - Jump if Carry (CF=1)
+JNC  - Jump if No Carry (CF=0)
+JZ   - Jump if Zero (ZF=1)
+JNZ  - Jump if Not Zero (ZF=0)
+JS   - Jump if Sign (SF=1, negative)
+JNS  - Jump if No Sign (SF=0, positive)
+JO   - Jump if Overflow (OF=1)
+JNO  - Jump if No Overflow (OF=0)
+JP   - Jump if Parity (PF=1, even)
+JNP  - Jump if No Parity (PF=0, odd)
+
+; Compound conditions (use multiple flags)
+JE   - Jump if Equal (ZF=1) - same as JZ
+JNE  - Jump if Not Equal (ZF=0) - same as JNZ
+JG   - Jump if Greater (signed: ZF=0 AND SF=OF)
+JL   - Jump if Less (signed: SF≠OF)
+JA   - Jump if Above (unsigned: CF=0 AND ZF=0)
+JB   - Jump if Below (unsigned: CF=1)
+```

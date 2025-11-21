@@ -1,0 +1,168 @@
+
+## 🧩 1️⃣ MUL Instruction — Unsigned Multiplication
+
+### 👉 Syntax:
+
+```
+MUL source
+```
+
+### ✅ Purpose:
+
+Performs **unsigned multiplication** between:
+
+* The **accumulator (AL or AX)** and
+* The **source operand** (which can be register or memory).
+
+---
+
+### 📘 Operand Size Rules
+
+| Operand Type | Operation            | Result | Stored In |
+| ------------ | -------------------- | ------ | --------- |
+| 8-bit        | AL × source (8-bit)  | 16-bit | AX        |
+| 16-bit       | AX × source (16-bit) | 32-bit | DX:AX     |
+
+💡 So depending on size:
+
+* If you multiply a **byte**, result goes in **AX**.
+* If you multiply a **word**, result goes in **DX:AX** (DX = high part, AX = low part).
+
+---
+
+### ⚙️ Example 1: 8-bit multiplication
+
+```asm
+MOV AL, 05H     ; AL = 5
+MOV BL, 04H     ; BL = 4
+MUL BL          ; AL * BL = 20
+```
+
+* Internally → 05 × 04 = 14H (20 decimal)
+* Result stored in **AX = 0014H**
+* So AL = 14H, AH = 00H
+
+---
+
+### ⚙️ Example 2: 16-bit multiplication
+
+```asm
+MOV AX, 0003H   ; AX = 3
+MOV BX, 0004H   ; BX = 4
+MUL BX          ; AX * BX = 12
+```
+
+* 3 × 4 = 000C (12 decimal)
+* Result stored in DX:AX
+
+  * DX = 0000H
+  * AX = 000CH
+
+---
+
+### ⚠️ Affected Flags:
+
+| Flag               | Description                     |
+| ------------------ | ------------------------------- |
+| CF (Carry Flag)    | Set if high half (AH or DX) ≠ 0 |
+| OF (Overflow Flag) | Same as CF                      |
+
+So for example:
+
+* If you multiply 2 small numbers and the result fits in lower half (AX or AL), CF=OF=0
+* If result is too big (needs upper part), CF=OF=1
+
+---
+
+## 🧮 2️⃣ DIV Instruction — Unsigned Division
+
+### 👉 Syntax:
+
+```
+DIV source
+```
+
+### ✅ Purpose:
+
+Performs **unsigned division**.
+
+---
+
+### 📘 Operand Size Rules
+
+| Operand Type | Dividend (Numerator) | Divisor (source) | Quotient | Remainder |
+| ------------ | -------------------- | ---------------- | -------- | --------- |
+| 8-bit        | AX                   | 8-bit            | AL       | AH        |
+| 16-bit       | DX:AX                | 16-bit           | AX       | DX        |
+
+💡 In division:
+
+* Dividend is always **twice** the size of divisor.
+* Remainder always same size as divisor.
+
+---
+
+### ⚙️ Example 1: 8-bit Division
+
+```asm
+MOV AX, 0014H    ; AX = 20 decimal
+MOV BL, 04H      ; Divisor = 4
+DIV BL           ; (AX / BL)
+```
+
+* 20 ÷ 4 = 5 remainder 0
+* AL = 05H → Quotient
+* AH = 00H → Remainder
+
+---
+
+### ⚙️ Example 2: 16-bit Division
+
+```asm
+MOV DX, 0000H
+MOV AX, 0014H    ; 20 decimal
+MOV BX, 0004H    ; Divisor = 4
+DIV BX
+```
+
+* Dividend = DX:AX = 00000014H = 20
+* 20 ÷ 4 = 5 remainder 0
+* AX = 0005H (Quotient)
+* DX = 0000H (Remainder)
+
+---
+
+### ⚠️ Error Case:
+
+If **divisor = 0** or **quotient too large**,
+→ **Divide Error** (Interrupt 0 is generated).
+
+---
+
+## 🧠 Quick Comparison Table
+
+| Instruction | Type              | Operands              | Result Location | Flags (CF, OF)  |
+| ----------- | ----------------- | --------------------- | --------------- | --------------- |
+| MUL         | Unsigned Multiply | AL/AX × reg/mem       | AX / DX:AX      | Set if overflow |
+| IMUL        | Signed Multiply   | AL/AX × reg/mem       | AX / DX:AX      | Set if overflow |
+| DIV         | Unsigned Divide   | AX or DX:AX ÷ reg/mem | AL/AH or AX/DX  | Undefined       |
+| IDIV        | Signed Divide     | AX or DX:AX ÷ reg/mem | AL/AH or AX/DX  | Undefined       |
+
+---
+
+## 🧩 Example: Combined MUL and DIV
+
+```asm
+MOV AL, 5      ; AL = 5
+MOV BL, 3      ; BL = 3
+MUL BL         ; AX = 15
+MOV BL, 2      ; BL = 2
+DIV BL         ; AL = 7 (15 / 2 = 7), AH = 1 (remainder)
+```
+
+Result →
+
+* Quotient = 7
+* Remainder = 1
+
+---

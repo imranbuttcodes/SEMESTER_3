@@ -1,0 +1,65 @@
+Perfect bro 👍
+We’ll start from the very basics and build layer by layer so that when you reach COAL, nothing will feel confusing.
+
+---
+
+## **Step 1: Number Systems (Binary, Decimal, Octal, Hexadecimal)**
+
+👉 First, you need to understand what a *number system* is:
+It’s just a way of representing numbers using **digits** and a **base (radix)**.
+
+* **Decimal (Base 10)** → digits: 0–9 (our normal counting).
+* **Binary (Base 2)** → digits: 0,1 (used by computers).
+* **Octal (Base 8)** → digits: 0–7 (short form of binary).
+* **Hexadecimal (Base 16)** → digits: 0–9, A–F (very common in assembly, for memory addresses).
+
+### Decimal to Binary (example):
+
+Take 13 (decimal).
+
+* Divide repeatedly by 2 until 0.
+* Write remainders from bottom to top.
+
+13 ÷ 2 = 6 remainder **1**
+6 ÷ 2 = 3 remainder **0**
+3 ÷ 2 = 1 remainder **1**
+1 ÷ 2 = 0 remainder **1**
+
+So **13 (decimal) = 1101 (binary)**.
+
+---
+
+### Binary to Decimal (example):
+
+Take 1101 (binary).
+
+* Each bit has a place value of powers of 2.
+
+(1101 = 1×2^3 + 1×2^2 + 0×2^1 + 1×2^0)
+= 8 + 4 + 0 + 1 = **13 (decimal)**.
+
+---
+
+### Binary to Octal (shortcut):
+
+Group binary digits into **3 bits** from right.
+Example: 1101 → (1 101) → 15 (octal).
+
+---
+
+### Binary to Hexadecimal (shortcut):
+
+Group binary digits into **4 bits**.
+Example: 1101 → (1101) → D (hex).
+
+So 13 (decimal) = 1101 (binary) = 15 (octal) = D (hex).
+
+---
+
+✅ First task for you:
+Convert **45 (decimal)** into:
+
+* Binary
+* Octal
+* Hexadecimal
+

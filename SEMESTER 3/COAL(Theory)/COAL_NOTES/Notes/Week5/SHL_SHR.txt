@@ -1,0 +1,168 @@
+## 🧩 1️⃣ SHL — Shift Logical Left
+
+### 📘 Syntax:
+
+```
+SHL destination, count
+```
+
+### ✅ Purpose:
+
+Shifts all bits of the **destination** to the **left** by the number of positions in `count`.
+
+### ⚙ Rules:
+
+* **Leftmost bit(s)** are discarded.
+* **Zero(s)** are filled into the **rightmost bit(s)**.
+* `count` can be:
+
+  * 1 (immediate)
+  * or value in **CL** register (for variable shifts).
+
+---
+
+### 🔍 Example 1:
+
+```asm
+MOV AL, 00000101B   ; AL = 5
+SHL AL, 1           ; Shift left by 1 bit
+```
+
+🧠 Working:
+
+```
+Before: 00000101B (5)
+After:  00001010B (10)
+```
+
+So effectively:
+👉 `SHL AL,1` = multiply by 2
+
+✅ CF (Carry Flag) = last bit shifted out (leftmost bit before shifting).
+Other flags affected: **OF, SF, ZF, PF**
+
+---
+
+### 🔍 Example 2:
+
+```asm
+MOV AL, 00001111B   ; AL = 0Fh (15)
+SHL AL, 2
+```
+
+🧠 Working:
+
+```
+00001111B → 00111100B
+= 3Ch = 60 decimal
+```
+
+💡 Each shift left = multiply by 2
+So `SHL AL, 2` = multiply by 2² = 4
+15 × 4 = 60 ✅
+
+---
+
+### ⚙ Flags Affected:
+
+| Flag | Meaning                                                         |
+| ---- | --------------------------------------------------------------- |
+| CF   | Last bit shifted out (leftmost bit before shift)                |
+| OF   | Defined only for 1-bit shifts: it becomes XOR of new MSB and CF |
+| SF   | Sign flag (depends on new MSB)                                  |
+| ZF   | Set if result = 0                                               |
+| PF   | Parity flag updated                                             |
+
+---
+
+## 🧩 2️⃣ SHR — Shift Logical Right
+
+### 📘 Syntax:
+
+```
+SHR destination, count
+```
+
+### ✅ Purpose:
+
+Shifts all bits of **destination** to the **right** by the number of positions in `count`.
+
+### ⚙ Rules:
+
+* **Rightmost bit(s)** are discarded.
+* **Zeros** are filled into the **leftmost bit(s)**.
+* Used for **unsigned division by 2ⁿ**.
+
+---
+
+### 🔍 Example 1:
+
+```asm
+MOV AL, 00001010B   ; AL = 10
+SHR AL, 1
+```
+
+🧠 Working:
+
+```
+Before: 00001010B (10)
+After:  00000101B (5)
+```
+
+👉 `SHR AL,1` = divide by 2
+
+✅ CF = last bit shifted out (rightmost bit before shift)
+
+---
+
+### 🔍 Example 2:
+
+```asm
+MOV AL, 00110000B   ; AL = 48
+SHR AL, 2
+```
+
+🧠 Working:
+
+```
+00110000B → 00001100B
+= 0Ch = 12 decimal
+```
+
+48 ÷ 2² = 12 ✅
+
+---
+
+### ⚙ Flags Affected:
+
+| Flag | Meaning                                                              |
+| ---- | -------------------------------------------------------------------- |
+| CF   | Last bit shifted out (rightmost bit before shift)                    |
+| OF   | Defined only for 1-bit shifts: becomes the original MSB before shift |
+| SF   | Sign flag updated                                                    |
+| ZF   | Set if result = 0                                                    |
+| PF   | Parity updated                                                       |
+
+---
+
+## ⚖ Comparison Summary
+
+| Instruction | Direction   | Fill          | Type       | Common Use                     | Equivalent Arithmetic |
+| ----------- | ----------- | ------------- | ---------- | ------------------------------ | --------------------- |
+| SHL         | Left        | 0s on right   | Logical    | Multiply unsigned by 2ⁿ        | value × 2ⁿ            |
+| SHR         | Right       | 0s on left    | Logical    | Divide unsigned by 2ⁿ          | value ÷ 2ⁿ            |
+| SAL         | Same as SHL | —             | Logical    | Alternate name                 | —                     |
+| SAR         | Right       | Sign-bit fill | Arithmetic | Divide **signed** number by 2ⁿ | signed ÷ 2ⁿ           |
+
+---
+
+## 💡 Example: Both Together
+
+```asm
+MOV AL, 5     ; 00000101B
+SHL AL, 1     ; 10  (×2)
+SHR AL, 1     ; 5   (÷2)
+```
+
+---
+

@@ -1,0 +1,159 @@
+Perfect bro 🔥 — that’s exactly the kind of deep curiosity you need!
+Let’s take this line apart piece by piece — and I’ll show you how **`msg`**, **`db`**, and **`dw`** actually work **inside memory** (no skipping details 👇).
+
+---
+
+## 🧠 The Line:
+
+```asm
+msg db "Hello", "$"
+num dw 1234h
+```
+
+---
+
+## 💡 1️⃣ What is `msg`?
+
+➡️ `msg` is **not** a built-in keyword.
+It’s **a variable name (label)** — a name that **you define**.
+
+In Assembly, you can name memory locations yourself.
+For example:
+
+```asm
+msg db "Hello"
+name db "Imran"
+num dw 1234h
+```
+
+Here:
+
+* `msg` is a **label (variable name)** for a memory location that stores `"Hello"`
+* `num` is a **label (variable name)** for a memory location that stores the value `1234h`
+
+So `msg` is basically saying:
+
+> “Assembler, please reserve memory somewhere in the data segment, and mark its address with the name `msg`.”
+
+Later, when you write:
+
+```asm
+lea dx, msg
+```
+
+It means:
+
+> “Load the **address of msg** into DX register.”
+
+💬 `msg` = memory address (label)
+🧠 You can think of it as similar to:
+
+```cpp
+char msg[] = "Hello";
+```
+
+in C++.
+
+---
+
+## 💡 2️⃣ What is `db`?
+
+`db` means **Define Byte**
+It tells the assembler how much space to reserve and what to store there.
+
+| Directive | Meaning           | Size    | Example                     |
+| --------- | ----------------- | ------- | --------------------------- |
+| `db`      | Define Byte       | 1 byte  | `db 5` → stores 05h         |
+| `dw`      | Define Word       | 2 bytes | `dw 1234h` → stores 34h 12h |
+| `dd`      | Define Doubleword | 4 bytes | `dd 12345678h`              |
+| `dq`      | Define Quadword   | 8 bytes | `dq 1234567890ABCDEFh`      |
+
+So,
+
+```asm
+msg db "Hello", "$"
+```
+
+→ means:
+
+> Store each character of "Hello" followed by "$" as bytes in consecutive memory locations.
+
+🧠 `"Hello", "$"` is **6 bytes total:**
+
+| Character | ASCII (Hex) |
+| --------- | ----------- |
+| H         | 48h         |
+| e         | 65h         |
+| l         | 6Ch         |
+| l         | 6Ch         |
+| o         | 6Fh         |
+| $         | 24h         |
+
+---
+
+So in memory (inside Data Segment):
+
+| Address   | Value     | Label |
+| --------- | --------- | ----- |
+| 2000:0000 | 48h ('H') | msg   |
+| 2000:0001 | 65h ('e') |       |
+| 2000:0002 | 6Ch ('l') |       |
+| 2000:0003 | 6Ch ('l') |       |
+| 2000:0004 | 6Fh ('o') |       |
+| 2000:0005 | 24h ('$') |       |
+
+So, `msg` points to the address **2000:0000** (first byte).
+
+---
+
+## 💡 3️⃣ What is `dw`?
+
+`dw` = **Define Word** = 2 bytes
+(“word” = 16 bits in x8086)
+
+So:
+
+```asm
+num dw 1234h
+```
+
+means → reserve **2 bytes** in memory, and store the hexadecimal value **1234h**.
+
+⚠️ Remember that the 8086 is **little-endian**, meaning:
+
+> The lower byte is stored first.
+
+So in memory:
+
+| Address   | Value |
+| --------- | ----- |
+| 2000:0006 | 34h   |
+| 2000:0007 | 12h   |
+
+---
+
+## 🧩 Summary:
+
+| Element   | Meaning                                       | Example                 |
+| --------- | --------------------------------------------- | ----------------------- |
+| `msg`     | Variable label (address)                      | Name of memory location |
+| `db`      | Define Byte (1 byte per value)                | `db "A", 10, 20`        |
+| `dw`      | Define Word (2 bytes per value)               | `dw 1234h`              |
+| `$`       | End marker for DOS interrupt 21h function 09h | `"Hello", "$"`          |
+| `"Hello"` | String stored as ASCII bytes                  | 6 bytes including `$`   |
+
+---
+
+✅ So your two lines:
+
+```asm
+msg db "Hello", "$"
+num dw 1234h
+```
+
+mean in plain English:
+
+> Create a variable called `msg` to hold the bytes for the string “Hello$”
+> and another variable `num` to hold the 16-bit hexadecimal value `1234`.
+
+---

@@ -1,0 +1,27 @@
+Before moving into complements and signed numbers, you should be **very comfortable** with conversions in all directions. Once your brain can convert instantly between decimal, binary, octal, and hex, the later COAL topics will feel *easy*.
+
+---
+
+Here’s how we’ll do it:
+
+### **Conversion Practice Roadmap**
+
+1. **Decimal ↔ Binary** (both ways)
+2. **Decimal ↔ Octal**
+3. **Decimal ↔ Hexadecimal**
+4. **Binary ↔ Octal** (shortcut: group 3 bits)
+5. **Binary ↔ Hexadecimal** (shortcut: group 4 bits)
+6. **Octal ↔ Hexadecimal** (convert via binary in between)
+
+---
+
+✅ Let’s practice now:
+Convert the following numbers **step by step (manually)**:
+
+1. **77 (decimal)** → binary, octal, hexadecimal
+2. **101011 (binary)** → decimal, octal, hexadecimal
+3. **2F (hexadecimal)** → decimal, binary, octal
+4. **345 (octal)** → decimal, binary, hexadecimal
+
+---
+

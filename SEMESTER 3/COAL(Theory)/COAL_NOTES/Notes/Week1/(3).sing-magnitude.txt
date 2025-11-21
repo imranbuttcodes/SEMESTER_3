@@ -1,0 +1,57 @@
+Perfect 👌 let’s go step by step into **Sign-Magnitude Representation**, the simplest way of representing signed numbers in binary.
+
+---
+
+## 🔹 1. What is Sign-Magnitude?
+
+* We use **one bit (MSB = Most Significant Bit)** to represent the **sign** of the number.
+* The remaining bits represent the **magnitude (absolute value)**.
+
+👉 Convention:
+
+* **0 = positive**
+* **1 = negative**
+
+So in an **8-bit system**:
+
+* `00001010` → +10
+* `10001010` → -10
+
+---
+
+## 🔹 2. Example with +5 and -5 (8-bit)
+
+* +5 → `00000101`
+* -5 → `10000101`
+
+Notice: Only the **first bit** (sign bit) changes, magnitude stays the same.
+
+---
+
+## 🔹 3. Range in Sign-Magnitude (for n bits)
+
+* You can represent numbers from:
+  (- (2^{n-1} - 1)) to (+(2^{n-1} - 1))
+* There are **two zeros**: +0 and -0.
+
+Example:
+For 8 bits:
+
+* Range = -127 to +127
+* Binary for +0 = `00000000`
+* Binary for -0 = `10000000` (problematic, wasteful).
+
+---
+
+## 🔹 4. Why Sign-Magnitude is rarely used?
+
+* Two zeros (+0 and -0) → confusion.
+* Arithmetic (like subtraction) is complicated because of the sign handling.
+* Computers prefer **2’s complement** (solves these issues).
+
+---
+
+✅ Quick practice for you:
+Write **+13 and -13** in **sign-magnitude form** using 8 bits.
+
+Wanna try?

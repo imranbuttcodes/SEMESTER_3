@@ -1,0 +1,74 @@
+Perfect 👌 let’s build this step by step.
+
+We already know **Sign-Magnitude** (MSB is sign, rest is magnitude). Now let’s see how **1’s complement** and **2’s complement** work.
+
+---
+
+# 🔹 1’s Complement Representation
+
+👉 Rule:
+To represent a **negative number**, take the binary of the positive number and **flip all the bits** (0 → 1, 1 → 0).
+
+* Positive numbers: same as normal binary.
+* Negative numbers: bitwise inversion of the positive.
+
+### Example: +13 and -13 (8-bit)
+
+* +13 = `00001101`
+* -13 = invert all bits → `11110010`
+
+✅ So in 1’s complement:
+
+* +13 = `00001101`
+* -13 = `11110010`
+
+⚠️ Problem: Still has **two zeros**:
+
+* +0 = `00000000`
+* -0 = `11111111`
+
+---
+
+# 🔹 2’s Complement Representation
+
+👉 Rule:
+To represent a **negative number**:
+
+1. Write positive number in binary.
+2. Take 1’s complement (flip bits).
+3. Add **1** to the result.
+
+* Positive numbers: same as normal binary.
+* Negative numbers: (invert + add 1).
+
+### Example: +13 and -13 (8-bit)
+
+* +13 = `00001101`
+* To get -13:
+
+  * Start with `00001101`
+  * 1’s complement = `11110010`
+  * Add 1 = `11110011`
+
+✅ So in 2’s complement:
+
+* +13 = `00001101`
+* -13 = `11110011`
+
+---
+
+# 🔹 Why 2’s Complement is the Winner?
+
+* Only **one zero** (no +0 / -0 confusion).
+* Arithmetic (addition/subtraction) works naturally in hardware.
+* This is what **modern CPUs actually use**.
+
+---
+
+✅ Quick Check for You:
+Can you represent **-45** in both:
+
+1. **1’s complement (8-bit)**
+2. **2’s complement (8-bit)**
+
+Try step by step — write +45 first, then convert.

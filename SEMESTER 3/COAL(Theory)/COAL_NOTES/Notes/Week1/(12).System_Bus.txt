@@ -1,0 +1,101 @@
+Perfect bro 👍 let’s go deep into the **System Bus** — the “communication highway” of the entire computer.
+
+---
+
+# 🚌 **What is a System Bus?**
+
+The **System Bus** is a group of **wires (or signal lines)** that connect the **CPU, memory, and input/output (I/O) devices** together — allowing them to **transfer data and control signals**.
+
+Think of it as the **main road** that carries:
+
+* Data (the “stuff” being moved),
+* Addresses (where to get or put that stuff),
+* Control signals (rules about what to do).
+
+---
+
+## 🔹 The 3 Types of Buses
+
+### 1. **Data Bus**
+
+* Carries **actual data** between CPU, memory, and I/O devices.
+* It’s **bi-directional** → data can flow both ways.
+* Width (number of lines) determines how many bits can be transferred at once.
+
+  * e.g. 8-bit bus → transfers 8 bits at a time.
+  * 64-bit bus → transfers 64 bits at a time (modern CPUs).
+
+💡 Example:
+When the CPU reads a value from memory:
+
+```
+Memory → Data Bus → CPU Register
+```
+
+---
+
+### 2. **Address Bus**
+
+* Carries the **address (location)** of where data is to be fetched from or stored.
+* It’s **uni-directional** → only CPU → Memory/I/O.
+* The width of the address bus determines how many **unique memory locations** can be addressed.
+
+💡 Example:
+
+* A **16-bit address bus** → ( 2^{16} = 65,536 ) memory locations (64 KB).
+* A **32-bit address bus** → ( 2^{32} = 4,294,967,296 ) = **4 GB** addressable memory.
+
+---
+
+### 3. **Control Bus**
+
+* Carries **control signals** that coordinate all actions in the computer.
+* Signals are sent by the **Control Unit** to tell other parts *what to do*.
+
+Examples of control signals:
+
+| Signal                   | Meaning                                  |
+| ------------------------ | ---------------------------------------- |
+| **Read (RD)**            | CPU wants to read data from memory.      |
+| **Write (WR)**           | CPU wants to write data to memory.       |
+| **Memory Enable (MEMR)** | Selects memory for operation.            |
+| **I/O Enable (IOR)**     | Selects an I/O device.                   |
+| **Clock**                | Synchronizes timing of all actions.      |
+| **Interrupt**            | I/O device signals CPU to get attention. |
+
+💡 The control bus ensures everything happens **in proper sequence and timing**.
+
+---
+
+## 🔄 How They Work Together
+
+Let’s see an example when CPU **reads data from memory**:
+
+1. **CPU → Address Bus:** sends address of data (say, 0x2004).
+2. **CPU → Control Bus:** sends `READ` signal.
+3. **Memory → Data Bus:** sends the requested data to CPU.
+
+```
+(Address Bus)  0x2004
+(Control Bus)  READ
+(Data Bus)     [ 10101100 ]
+```
+
+All three buses work **in parallel** during every instruction.
+
+---
+
+## 🧩 In Short
+
+| Bus Type        | Direction        | Function                               |
+| --------------- | ---------------- | -------------------------------------- |
+| **Data Bus**    | Bi-directional   | Transfers actual data                  |
+| **Address Bus** | CPU → Memory/I/O | Specifies memory/I/O address           |
+| **Control Bus** | Mixed            | Coordinates timing and control signals |
+
+---
+
+💡 Without buses, the CPU couldn’t “talk” to memory or devices — they are literally the **nervous system** of the computer.
+
+---
+

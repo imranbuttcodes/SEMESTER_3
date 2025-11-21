@@ -1,0 +1,186 @@
+## 🧩 1️⃣ ROL — **Rotate Left**
+
+### 📘 Syntax:
+
+```
+ROL destination, count
+```
+
+### ✅ Purpose:
+
+Rotates all bits of **destination** to the **left** by the number in `count`.
+
+### ⚙ What happens:
+
+* The **MSB (most significant bit)** moves into the **CF (carry flag)** *and* the **LSB (least significant bit)**.
+* The bits "wrap around" — nothing is lost.
+
+---
+
+### 🔍 Example 1:
+
+```asm
+MOV AL, 10000001B  ; AL = 81h
+ROL AL, 1
+```
+
+🧠 Step-by-step:
+
+```
+Before: 1 0000001
+After:  00000011
+```
+
+* The MSB (1) goes into both **CF** and the **LSB**.
+* Result = 00000011b = 03h
+* CF = 1
+
+✅ So ROL rotates all bits to the left **circularly**.
+
+---
+
+### ⚙ Flags:
+
+| Flag       | Description                                          |
+| ---------- | ---------------------------------------------------- |
+| **CF**     | Contains the bit shifted out from MSB                |
+| **OF**     | Defined only for 1-bit rotate: XOR of CF and new MSB |
+| **Others** | Unaffected                                           |
+
+---
+
+### 🔍 Example 2:
+
+```asm
+MOV AL, 0AH       ; 00001010b
+ROL AL, 2
+```
+
+🧠 Step-by-step:
+
+```
+Shift 1: 00010100 (CF=0)
+Shift 2: 00101000 (CF=0)
+→ AL = 28h = 40 decimal
+```
+
+---
+
+## 🧩 2️⃣ ROR — **Rotate Right**
+
+### 📘 Syntax:
+
+```
+ROR destination, count
+```
+
+### ✅ Purpose:
+
+Rotates all bits of **destination** to the **right** by `count`.
+
+### ⚙ What happens:
+
+* The **LSB** moves into both **CF** and the **MSB**.
+* Bits wrap around — no data loss.
+
+---
+
+### 🔍 Example 1:
+
+```asm
+MOV AL, 10000001B  ; 81h
+ROR AL, 1
+```
+
+🧠 Step-by-step:
+
+```
+Before: 10000001
+After:  11000000
+```
+
+* LSB (1) goes into CF and MSB.
+* Result = 11000000b = C0h
+* CF = 1 ✅
+
+---
+
+### ⚙ Flags:
+
+| Flag       | Description                                                            |
+| ---------- | ---------------------------------------------------------------------- |
+| **CF**     | Contains bit rotated out of LSB                                        |
+| **OF**     | Defined only for 1-bit rotate: XOR of MSB and next MSB before rotation |
+| **Others** | Unaffected                                                             |
+
+---
+
+### 🔍 Example 2:
+
+```asm
+MOV AL, 0CH      ; 00001100b
+ROR AL, 2
+```
+
+🧠 Step-by-step:
+
+```
+Shift 1: 00000110 (CF=0)
+Shift 2: 00000011 (CF=0)
+→ AL = 03h = 3 decimal
+```
+
+---
+
+## ⚖ Comparison Summary
+
+| Instruction | Direction | Bit moved to CF | Bit inserted | Type   | Data loss? |
+| ----------- | --------- | --------------- | ------------ | ------ | ---------- |
+| SHL         | Left      | MSB             | 0            | Shift  | Yes        |
+| SHR         | Right     | LSB             | 0            | Shift  | Yes        |
+| ROL         | Left      | MSB             | CF → LSB     | Rotate | ❌ No       |
+| ROR         | Right     | LSB             | CF → MSB     | Rotate | ❌ No       |
+
+---
+
+## 🔹 Bonus: RCL and RCR
+
+These are like ROL/ROR, **but include the Carry Flag** as an extra bit in the rotation.
+
+| Instruction | Meaning                    | Example Effect              |
+| ----------- | -------------------------- | --------------------------- |
+| **RCL**     | Rotate Left through Carry  | CF becomes part of rotation |
+| **RCR**     | Rotate Right through Carry | CF becomes part of rotation |
+
+So total rotation = **N + 1 bits** (operand + carry).
+
+---
+
+## 🔧 Example – ROL vs RCL difference
+
+```asm
+MOV AL, 10000001B  ; AL=81h
+CLC                 ; CF=0
+ROL AL,1
+; After: AL=00000011, CF=1
+
+MOV AL, 10000001B  ; Reset value
+CLC                 ; CF=0
+RCL AL,1
+; After: AL=00000010, CF=1
+```
+
+Notice: `RCL` uses carry flag as a bit in rotation!
+
+---
+
+## 💡 Real-Life Uses
+
+* **Data encryption** and **bit scrambling**
+* **Checksum and CRC algorithms**
+* **Cryptographic key mixing**
+* **Optimizing arithmetic (like multiplying by 17 = rotate + add)**
+* **Microcontroller bit control**
+
+---
+
